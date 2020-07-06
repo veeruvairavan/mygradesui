@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      height:'95vh',
+      height:'100vh',
       margin:'10px'
 
     },
