@@ -66,20 +66,34 @@ export default function Students(){
     });
 
     const classes = useStyles();
+    //Move to a service call
     const assessments = [
         'Assessments 1',
         'Assessments 2',
         'Assessments 3',
         'Assessments 4',
         'Assessments 5',
-      ];
+    ];
       
     const [students,setStudents] = useState();
-    const [open, setOpen] = React.useState(false);
-    const [assessment, setAssessment] = React.useState([]);
+    const [open, setOpen] = useState(false);
+    const [assessment, setAssessment] = useState([]);
+    const [studentForm, setStudentForm] = useState({
+        name:"",
+        class:"",
+        assessments:[]
+    });
+
+    const handleStudentFormChange = (event) => {
+        setStudentForm({
+            ...studentForm,
+            [event.target.name]: event.target.value,
+        })
+    }
 
     const handleChange = (event) => {
         setAssessment(event.target.value);
+        studentForm.assessments = assessment;
     };
 
     async function fetchStudents(){
@@ -106,6 +120,13 @@ export default function Students(){
     const handleClose = () => {
         setOpen(false);
     };
+
+    const handleCreate = event => {
+        event.preventDefault();
+        handleClose();
+        console.log(studentForm);
+        //Service Call
+    }
 
     useEffect(() => {
         fetchStudents().then(setStudents);
@@ -137,8 +158,8 @@ export default function Students(){
                                     {item.name}
                                 </StyledTableCell>
                                 <StyledTableCell component="th" scope="row">
-                                <EditIcon color="text.primary" onClick={() => editStudent(item)}/> 
-                                <DeleteIcon color="text.primary" onClick={() => deleteStudents(item)}/>
+                                <EditIcon color="action" onClick={() => editStudent(item)}/> 
+                                <DeleteIcon color="action" onClick={() => deleteStudents(item)}/>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}
@@ -148,28 +169,34 @@ export default function Students(){
 
                 <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Add User</DialogTitle>
+                    <form onSubmit={handleCreate}>
                     <DialogContent>
                         <TextField
                             autoFocus
                             margin="dense"
                             id="name"
+                            name="name"
                             label="Name"
                             type="text"
                             fullWidth
+                            onChange={handleStudentFormChange}
                         />
                         <TextField
                             margin="dense"
                             id="class"
+                            name="class"
                             label="Class"
                             type="text"
                             fullWidth
+                            onChange={handleStudentFormChange}
                         />
                         <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-mutiple-checkbox-label">Assessments</InputLabel>
+                            <InputLabel id="checkbox-label">Assessments</InputLabel>
                             <Select
                                 margin="dense"
-                                labelId="demo-mutiple-checkbox-label"
+                                labelId="checkbox-label"
                                 id="Assessments"
+                                name="assessments"
                                 multiple
                                 value={assessment}
                                 onChange={handleChange}
@@ -190,10 +217,11 @@ export default function Students(){
                         <Button onClick={handleClose} variant="contained" color="secondary">
                             Cancel
                         </Button>
-                        <Button onClick={handleClose} variant="contained" color="primary">
+                        <Button type="submit" variant="contained" color="primary">
                             Create
                         </Button>
                     </DialogActions>
+                    </form>
                 </Dialog>
             </div>
         )
