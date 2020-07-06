@@ -7,6 +7,7 @@ import {useHistory, Switch, Route, useRouteMatch} from 'react-router-dom';
 import CreateAssessment from '../createAssessments/createAssessment';
 import Students from '../students/students';
 import ViewAssessment from '../viewAssessments/viewAssessment';
+import StudentsTemp from '../students/student-temp';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,10 +81,10 @@ export default function TeacherDashboard(){
             <Paper className={classes.paper}>
                 <Switch>
                     <Route exact path="/home">
-                        <Students />
+                        <StudentsTemp />
                     </Route>
                     <Route exact path="/home/students" >
-                        <Students />
+                        <StudentsTemp />
                     </Route>
                     <Route exact path="/home/assessment" >
                             <CreateAssessment />

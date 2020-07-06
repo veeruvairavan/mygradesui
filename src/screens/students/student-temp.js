@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import SimpleTable from '../../components/SimpleTable';
 
-export default function Students(){
+export default function StudentsTemp(){
 
     const [students,setStudents] = useState();
     async function fetchStudents(){
