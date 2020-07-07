@@ -6,12 +6,13 @@ import {Button, Avatar} from '@material-ui/core';
 import {useHistory, Switch, Route, useRouteMatch} from 'react-router-dom';
 import CreateAssessment from '../createAssessments/createAssessment';
 import Students from '../students/students';
-import ViewAssessment from '../viewAssessments/viewAssessment';
+import ViewAssessments from '../viewAssessments/viewAssessments';
 import StudentsTemp from '../students/student-temp';
+import ViewAssessment from '../assessment/viewAssessment';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+      display:'flex'
     },
     paper: {
       padding: theme.spacing(2),
@@ -20,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      height:'100vh',
+      minHeight : '85vh',
+      height:'100%',
       margin:'10px'
 
     },
@@ -90,6 +92,9 @@ export default function TeacherDashboard(){
                             <CreateAssessment />
                     </Route>
                     <Route exact path="/home/view" >
+                            <ViewAssessments />
+                    </Route>
+                    <Route exact path="/home/viewAssessment" >
                             <ViewAssessment />
                     </Route>
                 </Switch>

@@ -5,6 +5,9 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import Chip from '@material-ui/core/Chip';
 import Divider from '@material-ui/core/Divider';
+import { Button } from '@material-ui/core';
+import {useHistory } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -29,6 +32,9 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '10px',
         fontSize : '22px',
         fontWeight : 'bold'
+    },
+    form:{
+        height : '100%'
     }
 }));
 
@@ -37,6 +43,7 @@ export default function CreateAssessment(){
     const [questions,addQuestion] = useState([{question:"",options:[],result:"0"}]);
     const [selectedQuestion,changeSelectedQuestion] = useState(0);
     const classes = useStyles();
+    const history = useHistory();
     let optionTxt = '';
 
     const onAddNewQuestion = (index)=>{
@@ -47,7 +54,8 @@ export default function CreateAssessment(){
 
 
     return (
-        <form key="assessment">
+        <div>
+            <form key="assessment" className={classes.form}>
             {
                 questions.map((question,index) => (
                     <Question question={question} 
@@ -55,9 +63,13 @@ export default function CreateAssessment(){
                     
                 ))
             }
-            
-            
-        </form>
+            </form>
+            <Button variant="contained" 
+                    color='primary'
+                    onClick={onPreviewAssessment}>
+                        Review Assessment
+            </Button>
+        </div>
     );
 
     function onChangeText(event,prop){
@@ -219,6 +231,10 @@ export default function CreateAssessment(){
                 <Divider className={classes.divider}/>
             </div>
         );
+    }
+
+    function onPreviewAssessment(){
+        history.push('/home/viewAssessment',[...questions]);
     }
 }
 
