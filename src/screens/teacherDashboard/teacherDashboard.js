@@ -9,6 +9,8 @@ import Students from '../students/students';
 import ViewAssessments from '../viewAssessments/viewAssessments';
 import StudentsTemp from '../students/student-temp';
 import ViewAssessment from '../assessment/viewAssessment';
+import AssessmentUserScreen from '../assessmentUser/assessmentUser';
+import AssessmentList from '../students/assessmentList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -97,6 +99,10 @@ export default function TeacherDashboard(){
                     <Route exact path="/home/viewAssessment" >
                             <ViewAssessment />
                     </Route>
+                    <Route exact path="/home/userAssessment">
+                            <AssessmentUserScreen />
+                    </Route>
+                    
                 </Switch>
             </Paper>
           </Grid>
