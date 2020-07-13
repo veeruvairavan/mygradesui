@@ -60,6 +60,12 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ma
 
 ### Advanced Configuration
 
+For Student
+
+http://localhost:3001/student
+
+Use the above link to take assessment.
+
 This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
 ### Deployment

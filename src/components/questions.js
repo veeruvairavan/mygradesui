@@ -46,7 +46,6 @@ export default function CreateAssessment(){
     const history = useHistory();
     let optionTxt = '';
     const [name,setName] = useState('');
-    const [isAssessmentCreated,setAssessment] = useState(false);
 
     const onAddNewQuestion = (index)=>{
         debugger;
@@ -60,42 +59,11 @@ export default function CreateAssessment(){
         setName(event.target.value);
     }
 
-    function onCreateAssessment(){
-        setAssessment(true);
-    }
-
-    function renderAssessmentForm(){
-        if(isAssessmentCreated){
-            return(
-                <div>
-                    <form key="assessment" className={classes.form}>
-                            {
-                                questions.map((question,index) => (
-                                    <Question question={question} 
-                                                index={index}/>
-                                    
-                                ))
-                            }
-                            </form>
-                    
-                        <Button variant="contained" 
-                                color='primary'
-                                onClick={onPreviewAssessment}>
-                                    Review Assessment
-                        </Button>  
-                    </div> 
-            )
-        }else{
-
-        }
-        
-    }
-
-    function renderAssessmentNameInput(){
-        if(!isAssessmentCreated){
-            return (
-                <span>
-                    <TextField className={classes.text} 
+    return (
+        <div>
+             <div>
+                    <span>
+                    <   TextField className={classes.text} 
                                     label="Assessment" 
                                     color="secondary" 
                                     value = {name}
@@ -103,31 +71,22 @@ export default function CreateAssessment(){
                                     key={name}
                                     onChange={(event)=>onChangeName(event)}
                                     />
-                    <Button onClick={onCreateAssessment}>Create</Button>
-                </span>
-            )
-        }else{
-
-            return(
-            <h2>{name}</h2>
-            )
-        }
-        
-    }
-
-    return (
-        <div>
-             <div>
-                   {
-
-                        renderAssessmentNameInput()
-                   }
-                   
+                    </span>
             </div>
+            <form key="assessment" className={classes.form}>
             {
-                
-                renderAssessmentForm()
+                questions.map((question,index) => (
+                    <Question question={question} 
+                                index={index}/>
+                    
+                ))
             }
+            </form>
+            <Button variant="contained" 
+                    color='primary'
+                    onClick={onPreviewAssessment}>
+                        Review Assessment
+            </Button>
         </div>
     );
 

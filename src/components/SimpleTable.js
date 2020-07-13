@@ -30,7 +30,7 @@ export default function SimpleTable(props){
                                     <TableRow key={row.name}>
                                         <TableCell align="right">{row.name}</TableCell>
                                         <TableCell align="right">{row.category}</TableCell>
-                                        <TableCell align="right">{row.assessments.length}</TableCell>
+                                        <TableCell align="right">{row.assessments?.length}</TableCell>
                                         <TableCell align="right">{row.status}</TableCell>
                                         <TableCell align="right">{row.badges.length}</TableCell>
                                     </TableRow>

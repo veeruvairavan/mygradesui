@@ -16,15 +16,17 @@ const useStyles = makeStyles((theme)=>({
         }
 }));
 
-export default function ViewAssessment() {
+export default function Assessment() {
     
     const classes = useStyles();
 
     const location = useLocation();
     const history = useHistory();
-
-    const [questions, setQuestions]= useState(location.state.questions);
+    debugger;
+    const [questions, setQuestions]= useState(location.state.qa);
+    const [answers,setAnswers] = useState(location.state.studentAnswers);
     const [name,setName] = useState(location.state.name);
+    const [result,setResult] = useState(0);
 
     const [userSelections,setUserSelected] = useState(questions.map((question)=>{
                                                         return question.options.map((option)=>{
@@ -51,6 +53,19 @@ export default function ViewAssessment() {
         setUserSelected(newuserSelections);
     }
 
+    function computeResults(studentAnswers,correctAnswers){
+
+        let result = 0;
+
+        correctAnswers.map((answer,index)=>{
+            if(answer == studentAnswers[index]){
+                result = result + 1;
+            }
+        });
+
+        return result.toString();
+    }
+
     async function onProceed(){
     
         debugger;
@@ -68,9 +83,12 @@ export default function ViewAssessment() {
                 }
             })               
                                     });
-        assessment.status = "created";
-        assessment.result = "";
-        assessment.userId = 2;
+
+                                    
+        assessment.status = "Completed";
+        assessment.result = computeResults(assessment.studentAnswers,answers);
+        
+        assessment.userId = 3;
         debugger;
 
         // POST request using fetch with async/await
@@ -83,7 +101,9 @@ export default function ViewAssessment() {
         const response = await fetch('http://localhost:3000/assessments', requestOptions);
         const data = await response.json();
 
+        setResult(assessment.result);
         setCreated(true);
+        
 
     }
 
@@ -128,7 +148,13 @@ export default function ViewAssessment() {
             )
         }else{
             return (
-                <div> Assessment Created </div>
+                <div> 
+                    Assessment Completed 
+                    <div>
+                        Your Score is {result}/{answers.length}
+                    </div>
+
+                </div>
             )
         }
         
