@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Login = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -51,6 +53,7 @@ const Login = () => {
     if (username === 'siva' && password === 'password') {
       setError(false);
       setHelperText('Login Successfully');
+      history.push("/home");
     } else {
       setError(true);
       setHelperText('Incorrect username or password')
@@ -63,7 +66,7 @@ const Login = () => {
     }
   };
 
-  return (
+  return (   
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
