@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { useLocation,useHistory } from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import {Radio, Paper, Button} from '@material-ui/core';
+import { UserDetailsContext } from '../../App';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -35,6 +36,8 @@ export default function Assessment() {
                                                       }));
 
     const [isCreated,setCreated] = useState(false);
+
+    const [userContext,setUserContext] = useContext(UserDetailsContext);
 
    
     debugger;
@@ -88,7 +91,7 @@ export default function Assessment() {
         assessment.status = "Completed";
         assessment.result = computeResults(assessment.studentAnswers,answers);
         
-        assessment.userId = 3;
+        assessment.userId = userContext.id;
         debugger;
 
         // POST request using fetch with async/await

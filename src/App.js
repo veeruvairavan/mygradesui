@@ -1,4 +1,4 @@
-import React from "react";
+import React, {createContext,useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,30 +16,37 @@ import StudentDashboard from "./screens/students/studentDashboard";
 import Assessment from "./screens/students/assessment";
 import ViewAssessment from "./screens/assessment/viewAssessment";
 
+export const UserDetailsContext = createContext({},()=>{});
+
 export default function App() {
 
+  const [value, setValue] = useState({
+    username : ''
+  });
 
   return (
-    <div>
-    <Header />
+    <UserDetailsContext.Provider value={[value,setValue]}>
+      <div>
+        <Header />
 
-    <Router>
-      <Switch>
-            <Route  path="/login">
-              <UserLogin />
-            </Route>
-            <Route  path="/home">
-              <TeacherDashboard />
-            </Route>
-            <Route path="/student">
-              <StudentDashboard />
-            </Route>
-            <Route path="/assessment">
-              <Assessment />
-            </Route>
-      </Switch>
-    </Router>
-    </div>
+        <Router>
+          <Switch>
+                <Route  path="/login">
+                  <UserLogin />
+                </Route>
+                <Route  path="/home">
+                  <TeacherDashboard />
+                </Route>
+                <Route path="/student">
+                  <StudentDashboard />
+                </Route>
+                <Route path="/assessment">
+                  <Assessment />
+                </Route>
+          </Switch>
+        </Router>
+      </div>
+    </UserDetailsContext.Provider>
   );
 }
 

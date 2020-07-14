@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -11,6 +11,7 @@ import StudentsTemp from '../students/student-temp';
 import ViewAssessment from '../assessment/viewAssessment';
 import AssessmentUserScreen from '../assessmentUser/assessmentUser';
 import AssessmentList from '../students/assessmentList';
+import { UserDetailsContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,6 +44,7 @@ export default function TeacherDashboard(){
     const classes = useStyles();
     const history = useHistory();
     const {path,url} = useRouteMatch();
+    const [value,setValue] = useContext(UserDetailsContext);
 
     const onBtnClick = (action) =>{
     
@@ -69,7 +71,7 @@ export default function TeacherDashboard(){
           <Grid item xs={4}>
             <Paper className={classes.paper} elevation={5}>
                 <Avatar src="/broken-image.jpg" className={classes.avatar}/>
-                <span>Mr. Fredicks</span>
+                <span>{value.name}</span>
                 <Button variant="outlined" 
                         className={classes.button} 
                         onClick={()=>onBtnClick('studentList')}>Students List</Button>

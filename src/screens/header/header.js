@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import GradeIcon from '@material-ui/icons/Grade';
+import { UserDetailsContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
 export default function header() {
   const classes = useStyles();
 
+  const [userContext,setUserContext] = useContext(UserDetailsContext); 
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -32,6 +35,9 @@ export default function header() {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             Student Grader
+          </Typography>
+          <Typography variant="h7" className={classes.title}>
+            Welcome {userContext.name}
           </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>

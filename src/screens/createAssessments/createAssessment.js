@@ -103,6 +103,7 @@ export default function CreateAssessment(){
                                     key={name}
                                     onChange={(event)=>onChangeName(event)}
                                     />
+                    
                     <Button onClick={onCreateAssessment}>Create</Button>
                 </span>
             )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import CardHeader from '@material-ui/core/CardHeader';
+import { UserDetailsContext } from '../../App';
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,8 +42,28 @@ const Login = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
+  const [userContext,setUserContext] = useContext(UserDetailsContext);
+
+  const [users,setUsers] = useState();
+  async function fetchStudents(){
+      const st = await fetch('http://localhost:3000/users');
+
+      const d = await st.json();
+      debugger;
+      return d;
+  } 
 
   useEffect(() => {
+
+  
+   
+      
+        
+        fetchStudents()
+            .then(setUsers);
+        
+ 
+
     if (username.trim() && password.trim()) {
       setIsButtonDisabled(false);
     } else {
@@ -50,10 +72,22 @@ const Login = () => {
   }, [username, password]);
 
   const handleLogin = () => {
-    if (username === 'siva' && password === 'password') {
-      setError(false);
-      setHelperText('Login Successfully');
-      history.push("/home");
+    debugger;
+    const userIndex = users.map((x,index)=>{return x.name.toLowerCase()}).indexOf(username.toLowerCase());
+    if (userIndex != -1 
+        && password === 'password') {
+ 
+      console.log('Jus log');
+      setUserContext(users[userIndex]);
+          
+      if(users[userIndex].category == "Teacher"){
+        history.push("/home");
+      }else if(users[userIndex].category == "Student"){
+        history.push("/student");
+      }
+
+
+      
     } else {
       setError(true);
       setHelperText('Incorrect username or password')
@@ -70,17 +104,16 @@ const Login = () => {
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Login App" />
+          <CardHeader className={classes.header} title="Happy Learning" />
           <CardContent>
             <div>
               <TextField
                 error={error}
                 fullWidth
                 id="username"
-                type="email"
-                label="Username"
-                placeholder="Username"
-                margin="normal"
+
+                label="Username"  
+                color="secondary" 
                 onChange={(e)=>setUsername(e.target.value)}
                 onKeyPress={(e)=>handleKeyPress(e)}
               />
