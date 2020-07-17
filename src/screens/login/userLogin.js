@@ -45,8 +45,10 @@ const Login = () => {
   const [userContext,setUserContext] = useContext(UserDetailsContext);
 
   const [users,setUsers] = useState();
+
+  const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
   async function fetchStudents(){
-      const st = await fetch('http://localhost:3000/users');
+      const st = await fetch(hostName+'/users');
 
       const d = await st.json();
       debugger;

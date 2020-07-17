@@ -4,8 +4,9 @@ import SimpleTable from '../../components/SimpleTable';
 export default function StudentsTemp(){
 
     const [students,setStudents] = useState();
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
     async function fetchStudents(){
-        const st = await fetch('http://localhost:3000/users?filter[include][][relation]=assessments');
+        const st = await fetch(hostName+'/users?filter[include][][relation]=assessments');
 
         const d = await st.json();
 

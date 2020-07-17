@@ -7,14 +7,33 @@ import { UserDetailsContext } from '../../App';
 
 const useStyles = makeStyles((theme)=>({
 
-        question : {
-            textAlign : 'left',
-            fontSize : '20px'
+    question : {
+        textAlign : 'center',
+        fontSize : '22px',
+        width:'90%'
+    },
+    option : {
+        display: 'flex',
+        justifyContent : 'center',
+        alignItems : 'center',
+        padding : '10px',
+        fontSize : '20px'
+    },
+    paper :{
+        width : '90%',
+        height: '30px'
+    },
+        root:{
+            display : 'flex',
+            justifyContent : 'center',
+            flexDirection : 'column',
+            alignItems : 'center',
+            width:'100%'
         },
-        option : {
-            display: 'flex',
-            justifyContent : 'left'
+        optionLabel:{
+            fontSize : '16px'
         }
+        
 }));
 
 export default function Assessment() {
@@ -25,7 +44,7 @@ export default function Assessment() {
     const history = useHistory();
     debugger;
     const [questions, setQuestions]= useState(location.state.qa);
-    const [answers,setAnswers] = useState(location.state.studentAnswers);
+    const [answers,setAnswers] = useState(location.state.correctAnswers);
     const [name,setName] = useState(location.state.name);
     const [result,setResult] = useState(0);
 
@@ -69,6 +88,8 @@ export default function Assessment() {
         return result.toString();
     }
 
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
+
     async function onProceed(){
     
         debugger;
@@ -87,6 +108,8 @@ export default function Assessment() {
             })               
                                     });
 
+        assessment.correctAnswers = answers;
+
                                     
         assessment.status = "Completed";
         assessment.result = computeResults(assessment.studentAnswers,answers);
@@ -101,11 +124,13 @@ export default function Assessment() {
                 body: JSON.stringify(assessment)
             };
 
-        const response = await fetch('http://localhost:3000/assessments', requestOptions);
+        const response = await fetch(hostName+'/assessments', requestOptions);
         const data = await response.json();
 
         setResult(assessment.result);
-        setCreated(true);
+        //setCreated(true);
+
+        history.push('/result',assessment);
         
 
     }
@@ -120,19 +145,19 @@ export default function Assessment() {
         
             if(!isCreated){
             return (
-                <div>
+                <div className={classes.root}>
                     <h2>{name}</h2>
                     {
                         questions.map((question,questionIndex) => (
                             <div className={classes.question}>
-                                <Paper >{question.question}</Paper>
+                                <Paper className={classes.paper}>{question.question}</Paper>
                                         { question.options.map((option,answerIndex)=>(
                                             <span className={classes.options}>
                                                 <Radio color='primary' 
                                                         value={option} 
                                                         checked={userSelections[questionIndex][answerIndex]?.isCorrect}
                                                         onChange={()=>onCheckAnswer(questionIndex,answerIndex,option)}/>
-                                                <label>{option}</label>
+                                                <label className={classes.optionLabel}>{option}</label>
                                             </span>
                                         ))}
                               

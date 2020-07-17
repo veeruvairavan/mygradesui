@@ -25,12 +25,17 @@ const useStyles = makeStyles({
 
 export default function AssessmentList(props){
 
-    const {teachers} = props;
+    const {teachers,student} = props;
     const classes = useStyles();
     const history = useHistory();
 
     function takeAssessment(assessment){
       history.push('/assessment',assessment);
+    }
+
+    function review(assessment){
+      debugger;
+      history.push('/result',assessment);
     }
  
     function renderAssessment(){
@@ -47,7 +52,9 @@ export default function AssessmentList(props){
                                     <Grid xs={3}>
                                       <OutlinedCard teacher = {teacher}
                                                   assessment = {assessment}
-                                                  takeAssessment = {()=>takeAssessment(assessment)} />
+                                                  takeAssessment = {()=>takeAssessment(assessment)} 
+                                                  review = {()=>review(assessment)} 
+                                                  />
                                     </Grid>
                                       
                                   
@@ -61,7 +68,36 @@ export default function AssessmentList(props){
               }
               
           })
-        }else{
+        }if(student && student.length >0 ){
+          return student.map((student)=>{
+            debugger;
+            if( student.assessments && 
+              student.assessments.length > 0){
+                return (
+                    <Grid container >
+                        {
+                            student.assessments.map(assessment=>{
+                                return (
+                                  <Grid xs={3}>
+                                    <OutlinedCard student = {student}
+                                                assessment = {assessment}
+                                                review = {()=>review(assessment)}  />
+                                  </Grid>
+                                    
+                                
+                                  
+                                )
+                            })
+                        }
+                    </Grid>
+                    
+                )
+            }
+            
+        })
+      }
+      else {
+          
           return (
             <div>Loading ...</div>
           )
@@ -89,7 +125,7 @@ function OutlinedCard(prop) {
             {(prop.assessment.status && prop.assessment.status == 'created') ? 'Yet To Start': prop.assessment.status}
           </Typography>
           <Typography variant="h5" component="h2">
-            Mr.{prop.teacher.name}
+            Mr.{prop.teacher ? prop.teacher.name : prop.student.name}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
             {prop.assessment.name}
@@ -100,9 +136,17 @@ function OutlinedCard(prop) {
             Look up Timer will be running
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={prop.takeAssessment}>Take Assessment</Button>
-        </CardActions>
+        {
+          (prop.teacher != null) ?
+          (<CardActions>
+            <Button size="small" onClick={prop.takeAssessment}>Take Assessment</Button>
+          </CardActions>)
+          :
+          (<CardActions>
+            <Button size="small" onClick={prop.review}>Review Assessment</Button>
+          </CardActions>)
+        }
+        
       </Card>
     );
   }

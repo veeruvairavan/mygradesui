@@ -3,6 +3,7 @@ import { useLocation,useHistory } from "react-router-dom";
 import {makeStyles} from '@material-ui/core/styles';
 import {Radio, Paper, Button} from '@material-ui/core';
 import { UserDetailsContext } from '../../App';
+import Done from '../../assets/gifs/done.gif';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -54,6 +55,8 @@ export default function ViewAssessment() {
         setUserSelected(newuserSelections);
     }
 
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
+
     async function onProceed(){
     
         debugger;
@@ -63,11 +66,11 @@ export default function ViewAssessment() {
 
         assessment.name = name;
         assessment.qa = questions;
-        assessment.studentAnswers = [];
+        assessment.correctAnswers = [];
         userSelections.map((questions)=>{
             return questions.map((selection,index)=>{
                 if(selection.isCorrect){
-                    assessment.studentAnswers.push(selection.value);
+                    assessment.correctAnswers.push(selection.value);
                 }
             })               
                                     });
@@ -83,7 +86,7 @@ export default function ViewAssessment() {
                 body: JSON.stringify(assessment)
             };
 
-        const response = await fetch('http://localhost:3000/assessments', requestOptions);
+        const response = await fetch(hostName+'/assessments', requestOptions);
         const data = await response.json();
 
         setCreated(true);
@@ -131,7 +134,9 @@ export default function ViewAssessment() {
             )
         }else{
             return (
-                <div> Assessment Created </div>
+                <div> 
+                    <img src={Done} />
+                </div>
             )
         }
         

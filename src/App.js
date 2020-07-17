@@ -15,6 +15,7 @@ import SimpleTable from "./components/SimpleTable";
 import StudentDashboard from "./screens/students/studentDashboard";
 import Assessment from "./screens/students/assessment";
 import ViewAssessment from "./screens/assessment/viewAssessment";
+import AssessmentResult from "./screens/students/assessmentResult";
 
 export const UserDetailsContext = createContext({},()=>{});
 
@@ -43,6 +44,9 @@ export default function App() {
                 <Route path="/assessment">
                   <Assessment />
                 </Route>
+               <Route path="/result">
+                 <AssessmentResult />
+               </Route>
           </Switch>
         </Router>
       </div>

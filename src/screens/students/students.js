@@ -95,9 +95,9 @@ export default function Students(){
         setAssessment(event.target.value);
         studentForm.assessments = assessment;
     };
-
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
     async function fetchStudents(){
-        const students = await fetch('http://localhost:3000/users');
+        const students = await fetch(hostName+'/users');
 
         const data = await students.json();
 

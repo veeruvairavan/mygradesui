@@ -1,11 +1,15 @@
-import React, {useState, useEffect}from 'react';
+import React, {useState, useEffect, useContext}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgressWithLabel from '../../components/CircularProgressWithLabel';
 import TitlebarGridList from '../../components/TitleBarGridList';
 import AssessmentList from './assessmentList';
+import { UserDetailsContext } from '../../App';
 
 const useStyles = makeStyles((theme)=>({
-
+    root:{
+        display:"flex",
+        direction:"column"
+    }
 }));
 
 export default function StudentDashboard(){
@@ -16,9 +20,15 @@ export default function StudentDashboard(){
 
     const [teachers,setTeachers] = useState([]);
 
+    const [student,setStudent] = useState([]);
+
+    const [userContext,setUserContext] = useContext(UserDetailsContext);
+
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
+    
     async function fetchUsers(){
         
-        const st = await fetch('http://localhost:3000/users?filter[include][][relation]=assessments');
+        const st = await fetch(hostName+'/users?filter[include][][relation]=assessments');
 
         const d = await st.json();
 
@@ -31,7 +41,14 @@ export default function StudentDashboard(){
             return (user.category == 'Teacher');
         });
 
+        const student =  data.filter((user)=>{
+            return (user.id == userContext.id);
+        });
+
+        
+
         setTeachers(teachers);
+        setStudent(student);
     }
 
     useEffect(() => {
@@ -43,8 +60,10 @@ export default function StudentDashboard(){
     },[]);
 
     return (
-        <div>
+        <div className={classes.root}>
            <AssessmentList teachers= {teachers} />
+           <hr/>
+           <AssessmentList student= {student}/>
         </div>
     )
 }

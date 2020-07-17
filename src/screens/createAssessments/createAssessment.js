@@ -35,6 +35,19 @@ const useStyles = makeStyles(theme => ({
     },
     form:{
         height : '100%'
+    },
+    root:{
+        display : 'flex',
+        justifyContent : 'center',
+        flexDirection : 'column',
+        alignItems : 'center',
+        '& > *': {
+            margin: theme.spacing(2),
+            width: theme.spacing(6),
+            height: theme.spacing(8),
+            padding : '10px'
+            
+          }
     }
 }));
 
@@ -117,8 +130,8 @@ export default function CreateAssessment(){
     }
 
     return (
-        <div>
-             <div>
+        <div >
+             <div >
                    {
 
                         renderAssessmentNameInput()
