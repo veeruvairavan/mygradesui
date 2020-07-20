@@ -11,7 +11,7 @@ import {TableContainer,
 
 export default function SimpleTable(props){
 
-    const {columns,rows} = props;
+    const {columns,rows,data} = props;
     
 
     return (<TableContainer>
@@ -25,14 +25,15 @@ export default function SimpleTable(props){
                     </TableHead>
                     <TableBody>
                         {
-                            rows.map((row)=>(
-                                row.category == "Student" ?  (
-                                    <TableRow key={row.name}>
-                                        <TableCell align="right">{row.name}</TableCell>
-                                        <TableCell align="right">{row.category}</TableCell>
-                                        <TableCell align="right">{row.assessments?.length}</TableCell>
-                                        <TableCell align="right">{row.status}</TableCell>
-                                        <TableCell align="right">{row.badges.length}</TableCell>
+                            data.map((d)=>(
+                                d.category == "Student" ?  (
+                                    <TableRow key={d.name}>
+                                        {
+                                            rows.map((row)=>(
+                                                <TableCell align="right">{row.isLengthCheck ? 
+                                                    d[row.key]?.length : d[row.key]}</TableCell>
+                                            ))
+                                        }
                                     </TableRow>
                                 ) : <div></div>
                                

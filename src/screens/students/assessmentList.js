@@ -7,12 +7,30 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import SimpleTable from '../../components/SimpleTable';
+import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import { MapsRateReview } from 'material-ui/svg-icons';
+import CircularProgressWithLabel from '../../components/CircularProgressWithLabel';
+import { Paper } from '@material-ui/core';
 
 
-const useStyles = makeStyles({
-    holder: {
-      flexGrow : 1
-    
+const useStyles = makeStyles(theme=>({
+
+
+    paper: {
+      padding: theme.spacing(2),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+      display: 'flex',
+      flexDirection: 'column',
+     
+      minHeight : '80vh',
+      maxHeight : '475px',
+      height : '90%',
+      margin:'10px',
+      width:'33.3%',
+      overflow:"scroll"
+
     },
    
     title: {
@@ -21,7 +39,21 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
-  });
+    spanX  : { 
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          textAlign: 'center'
+        },
+
+        card :{
+          height:'100%',
+          width:'100%',
+          minHeight : '80px',
+          marginBottom : "2px"
+        }
+  }));
 
 export default function AssessmentList(props){
 
@@ -37,59 +69,65 @@ export default function AssessmentList(props){
       debugger;
       history.push('/result',assessment);
     }
+
+
  
     function renderAssessment(){
         if(teachers && teachers.length >0 ){
             return teachers.map((teacher)=>{
-              debugger;
               if( teacher.assessments && 
                   teacher.assessments.length > 0){
                   return (
-                      <Grid container >
+                      <div container >
                           {
                               teacher.assessments.map(assessment=>{
                                   return (
-                                    <Grid xs={3}>
-                                      <OutlinedCard teacher = {teacher}
-                                                  assessment = {assessment}
-                                                  takeAssessment = {()=>takeAssessment(assessment)} 
-                                                  review = {()=>review(assessment)} 
-                                                  />
-                                    </Grid>
+                                    <CustomCard 
+                                      data={assessment}
+                                      display = {teacher.gender + 
+                                                  ' '
+                                                  +teacher.lastname+"'s"+' '
+                                                  +assessment.name }
+                                      takeAssessment = {()=>takeAssessment(assessment)}
+                                      />
                                       
                                   
                                     
                                   )
                               })
                           }
-                      </Grid>
+                      </div>
                       
                   )
+              }else{
+                return(
+                  <div>No Pending Assessments for You!</div>
+                )
               }
               
           })
         }if(student && student.length >0 ){
           return student.map((student)=>{
-            debugger;
             if( student.assessments && 
               student.assessments.length > 0){
                 return (
-                    <Grid container >
+                    <div container >
                         {
                             student.assessments.map(assessment=>{
                                 return (
-                                  <Grid xs={3}>
-                                    <OutlinedCard student = {student}
-                                                assessment = {assessment}
-                                                review = {()=>review(assessment)}  />
-                                  </Grid>
+                                  <CustomCard 
+                                      data={assessment}
+                                      display = {assessment.teacher+"'s"+' '
+                                                +assessment.name  }
+                                      takeAssessment = {()=>review(assessment)}
+                                      />
                                     
                                 
                                   
                                 )
                             })
                         }
-                    </Grid>
+                    </div>
                     
                 )
             }
@@ -105,48 +143,57 @@ export default function AssessmentList(props){
         }
         
     }
+
+  
     return (
-        <div className={classes.holder}>
+        <Paper elevation = {10} className={classes.paper}>
             {
-               renderAssessment()
+              renderAssessment()
             }
-        </div>
+        </Paper>
     )
 }
 
-function OutlinedCard(prop) {
-    const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
-  
-    return (
-      <Card className={classes.root} variant="outlined">
+
+function CustomCard(props){
+
+  const classes = useStyles();
+
+  return (
+    <Card  className = {classes.card} 
+            variant="outlined"
+            evelation={5}
+            onClick={props.takeAssessment}>
+      <span>
         <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {(prop.assessment.status && prop.assessment.status == 'created') ? 'Yet To Start': prop.assessment.status}
-          </Typography>
-          <Typography variant="h5" component="h2">
-            Mr.{prop.teacher ? prop.teacher.name : prop.student.name}
-          </Typography>
-          <Typography className={classes.pos} color="textSecondary">
-            {prop.assessment.name}
-          </Typography>
-          <Typography variant="body2" component="p">
-            Complete it faster and Earn a badge
-            <br />
-            Look up Timer will be running
-          </Typography>
+            <Typography className={classes.title} color="textSecondary" align = 'left' gutterBottom>
+              {props.data.result != '' ? 'Completed' : 'Pending'}
+            </Typography>
+            <span className={classes.spanX}>
+              {props.display}
+            </span>
+            {
+              props.data.result != '' ?
+                (
+                  <span className={classes.spanX}>
+                    <CircularProgressWithLabel 
+                      txt = {props.data.result+'/'+props.data.correctAnswers.length}
+                      value = {100}
+                      custom={true} size="3rem"
+                      variant = "body2"/>  
+
+                    <CircularProgressWithLabel 
+                      variant = "caption"
+                      value = {props.data.result/props.data.correctAnswers.length*100} size="3rem"/>  
+                  </span>
+                ) : ''
+            }
+            
+            
+   
         </CardContent>
-        {
-          (prop.teacher != null) ?
-          (<CardActions>
-            <Button size="small" onClick={prop.takeAssessment}>Take Assessment</Button>
-          </CardActions>)
-          :
-          (<CardActions>
-            <Button size="small" onClick={prop.review}>Review Assessment</Button>
-          </CardActions>)
-        }
-        
-      </Card>
-    );
-  }
+      
+      </span>
+    </Card>
+  )
+}

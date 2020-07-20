@@ -34,10 +34,20 @@ export default function StudentsTemp(){
                     "Status",
                     "Badges"];
 
-    const rows = [];
+                    
+
+    const rows = [
+                    {key: 'name',isLengthCheck:false},
+                    {key: 'category',isLengthCheck:false},
+                    {key: 'assessments',isLengthCheck:true},
+                    {key: 'status',isLengthCheck:false},
+                    {key: 'badges',isLengthCheck:true}
+                 ];
+
+
 
    if(students){
-    return (<SimpleTable columns = {columns} rows= {students}/>);
+    return (<SimpleTable columns = {columns} rows= {rows} data={students}/>);
    }else{
        return <div>Loading ...</div>
    }

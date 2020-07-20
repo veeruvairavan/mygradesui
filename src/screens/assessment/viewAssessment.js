@@ -77,6 +77,8 @@ export default function ViewAssessment() {
         assessment.status = "created";
         assessment.result = "";
         assessment.userId = value.id;
+        assessment.teacherId = value.id;
+        assessment.teacher = value.gender+value.lastname;
         debugger;
 
         // POST request using fetch with async/await

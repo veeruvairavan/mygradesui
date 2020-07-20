@@ -42,7 +42,7 @@ export default function Assessment() {
 
     const location = useLocation();
     const history = useHistory();
-    debugger;
+   
     const [questions, setQuestions]= useState(location.state.qa);
     const [answers,setAnswers] = useState(location.state.correctAnswers);
     const [name,setName] = useState(location.state.name);
@@ -59,10 +59,10 @@ export default function Assessment() {
     const [userContext,setUserContext] = useContext(UserDetailsContext);
 
    
-    debugger;
+  
 
     function onCheckAnswer(questionIndex,answerIndex,option){
-        debugger;
+       
 
         var newuserSelections = [...userSelections];
 
@@ -92,7 +92,7 @@ export default function Assessment() {
 
     async function onProceed(){
     
-        debugger;
+     
 
 
         const assessment = {};
@@ -115,7 +115,10 @@ export default function Assessment() {
         assessment.result = computeResults(assessment.studentAnswers,answers);
         
         assessment.userId = userContext.id;
-        debugger;
+
+        assessment.teacher = location.state.teacher;
+        assessment.teacherId = location.state.teacherId;
+     
 
         // POST request using fetch with async/await
         const requestOptions = {
@@ -127,8 +130,31 @@ export default function Assessment() {
         const response = await fetch(hostName+'/assessments', requestOptions);
         const data = await response.json();
 
-        setResult(assessment.result);
+        
         //setCreated(true);
+
+        debugger;
+        const userDetails =  Object.assign({}, userContext);
+
+        userDetails.prefs = userDetails.prefs  && userDetails.prefs.length > 0 ? userDetails.prefs : [{completed : []}];
+
+        userDetails.prefs[0].completed.push(location.state.id);
+
+        userDetails.points = (!userDetails.points ? 0 : userDetails.points) + 
+                                Math.round(Number(assessment.result)/assessment.correctAnswers.length*100)
+
+        const requestOptions2 = {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userDetails)
+        }
+
+        const res = await fetch(hostName+'/users/'+userDetails.id, requestOptions2);
+        const da = await res;
+
+
+        //setResult(assessment.result);
+        setUserContext(userDetails);
 
         history.push('/result',assessment);
         
