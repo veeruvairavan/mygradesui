@@ -1,5 +1,5 @@
 ---
-path: ../build/
+path: build/
 memory: 64M
 instances: 1
 domain: eu-gb.mybluemix.net

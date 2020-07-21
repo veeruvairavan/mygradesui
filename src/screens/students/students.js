@@ -95,7 +95,7 @@ export default function Students(){
         setAssessment(event.target.value);
         studentForm.assessments = assessment;
     };
-    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'';
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'https://studentgrader.apic.eu-gb.mybluemix.net';
     async function fetchStudents(){
         const students = await fetch(hostName+'/users');
 
