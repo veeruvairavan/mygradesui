@@ -1,4 +1,5 @@
 import React from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 import {TableContainer,
         Table,
@@ -12,29 +13,47 @@ import {TableContainer,
 export default function SimpleTable(props){
 
     const {columns,rows,data} = props;
+
+    const StyledTableCell = withStyles((theme) => ({
+        head: {
+          backgroundColor: theme.palette.info.dark,
+          color: theme.palette.common.white,
+        },
+        body: {
+          fontSize: 14,
+        },
+    }))(TableCell);
+      
+    const StyledTableRow = withStyles((theme) => ({
+        root: {
+          '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+          },
+        },
+    }))(TableRow);
     
 
     return (<TableContainer>
                 <TableContainer>
                     <TableHead>
-                        <TableRow>
+                        <StyledTableRow>
                             {columns.map((column)=> (
-                                <TableCell align="right">{column}</TableCell>
+                                <StyledTableCell align="right">{column}</StyledTableCell>
                             ))}
-                        </TableRow>
+                        </StyledTableRow>
                     </TableHead>
                     <TableBody>
                         {
                             data.map((d)=>(
-                                d.category == "Student" ?  (
-                                    <TableRow key={d.name}>
+                                d.category === "Student" ?  (
+                                    <StyledTableRow key={d.name}>
                                         {
                                             rows.map((row)=>(
-                                                <TableCell align="right">{row.isLengthCheck ? 
-                                                    d[row.key]?.length : d[row.key]}</TableCell>
+                                                <StyledTableCell align="right">{row.isLengthCheck ? 
+                                                    d[row.key]?.length : d[row.key]}</StyledTableCell>
                                             ))
                                         }
-                                    </TableRow>
+                                    </StyledTableRow>
                                 ) : <div></div>
                                
                             

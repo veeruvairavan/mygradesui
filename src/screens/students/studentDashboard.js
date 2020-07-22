@@ -62,7 +62,7 @@ export default function StudentDashboard() {
 
     ]);
 
-    const hostName = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
+    const hostName = window.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://studentgrader.apic.eu-gb.mybluemix.net';
 
     async function fetchUsers() {
 
