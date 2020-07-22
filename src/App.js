@@ -16,6 +16,7 @@ import StudentDashboard from "./screens/students/studentDashboard";
 import Assessment from "./screens/students/assessment";
 import ViewAssessment from "./screens/assessment/viewAssessment";
 import AssessmentResult from "./screens/students/assessmentResult";
+import Dashboard from "./screens/dashboard/Dashboard";
 
 export const UserDetailsContext = createContext({},()=>{});
 

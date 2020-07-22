@@ -12,6 +12,7 @@ import { UserDetailsContext } from '../../App';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    zIndex : 200
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -33,13 +34,15 @@ export default function header() {
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <GradeIcon />
           </IconButton>
+          <div>
           <Typography variant="h6" className={classes.title}>
             Student Grader
           </Typography>
           <Typography variant="h7" className={classes.title}>
             Welcome {userContext.name}
           </Typography>
-          <Button color="inherit">Logout</Button>
+          </div>
+          
         </Toolbar>
       </AppBar>
     </div>
