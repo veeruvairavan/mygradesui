@@ -18,6 +18,7 @@ export default function SimpleTable(props){
         head: {
           backgroundColor: theme.palette.info.dark,
           color: theme.palette.common.white,
+          'min-width' : '150px'
         },
         body: {
           fontSize: 14,
@@ -38,7 +39,7 @@ export default function SimpleTable(props){
                     <TableHead>
                         <StyledTableRow>
                             {columns.map((column)=> (
-                                <StyledTableCell align="right">{column}</StyledTableCell>
+                                <StyledTableCell>{column}</StyledTableCell>
                             ))}
                         </StyledTableRow>
                     </TableHead>
@@ -49,7 +50,7 @@ export default function SimpleTable(props){
                                     <StyledTableRow key={d.name}>
                                         {
                                             rows.map((row)=>(
-                                                <StyledTableCell align="right">{row.isLengthCheck ? 
+                                                <StyledTableCell>{row.isLengthCheck ? 
                                                     d[row.key]?.length : d[row.key]}</StyledTableCell>
                                             ))
                                         }

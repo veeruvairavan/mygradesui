@@ -38,23 +38,11 @@ import Deposits from '../dashboard/Deposits';
 import Orders from '../dashboard/Orders';
 import { mainListItems, secondaryListItems } from '../dashboard/listItems';
 
-const drawerWidth = 260;
+const drawerWidth = 265;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      display:'flex'
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      minHeight : '85vh',
-      height:'100%',
-      margin:'10px'
-
+      flexgrow: 1
     },
     avatar:{
         alignSelf : 'center',
@@ -108,6 +96,7 @@ const useStyles = makeStyles((theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
       }),
+      top: '4px'
     },
     drawerPaperClose: {
       overflowX: 'hidden',
@@ -131,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(4),
     },
     paper: {
-      padding: theme.spacing(2),
+      padding: '10px !important',
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
@@ -181,7 +170,7 @@ export default function TeacherDashboard(){
         <Grid container spacing={1}>
           <div item xs={4}>
           <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -205,7 +194,7 @@ export default function TeacherDashboard(){
             noWrap
             className={classes.title}
           >
-            Dashboard
+            Student Grading Dashboard
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -213,7 +202,7 @@ export default function TeacherDashboard(){
             </Badge>
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Drawer
         variant="permanent"
         classes={{
@@ -221,18 +210,24 @@ export default function TeacherDashboard(){
         }}
         open={open}
       >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
+      <span>
+      {open? (
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton> 
+          </div> ) : ''}
+          <Divider /> 
+        </span>
         <List>{mainListItems({onAction:onBtnClick})}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
           </div>
-          <Grid item xs={9} className = {classes.paper}>
+          <Grid container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start" spacing={45} item xs={9} className = {classes.paper}>
            
                 <Switch>
                     <Route exact path="/home">
