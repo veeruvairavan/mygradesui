@@ -4,7 +4,7 @@ import SimpleTable from '../../components/SimpleTable';
 export default function StudentsTemp(){
 
     const [students,setStudents] = useState();
-    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'https://studentgrader.apic.eu-gb.mybluemix.net';
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'https://67a05636.us-south.apigw.appdomain.cloud/studentgrader';
     async function fetchStudents(){
         const st = await fetch(hostName+'/users?filter[include][][relation]=assessments');
 

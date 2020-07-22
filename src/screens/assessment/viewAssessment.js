@@ -55,7 +55,7 @@ export default function ViewAssessment() {
         setUserSelected(newuserSelections);
     }
 
-    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'https://studentgrader.apic.eu-gb.mybluemix.net';
+    const hostName  = window.location.hostname === 'localhost'?'http://localhost:3000':'https://67a05636.us-south.apigw.appdomain.cloud/studentgrader';
 
     async function onProceed(){
     

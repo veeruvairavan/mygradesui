@@ -170,7 +170,7 @@ export default function TeacherDashboard(){
         <Grid container spacing={1}>
           <div item xs={4}>
           <CssBaseline />
-      {/* <AppBar
+      <AppBar
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -202,7 +202,7 @@ export default function TeacherDashboard(){
             </Badge>
           </IconButton>
         </Toolbar>
-      </AppBar> */}
+      </AppBar>
       <Drawer
         variant="permanent"
         classes={{
@@ -221,13 +221,10 @@ export default function TeacherDashboard(){
         </span>
         <List>{mainListItems({onAction:onBtnClick})}</List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
+        <List>{secondaryListItems}</List>
       </Drawer>
           </div>
-          <Grid container
-                direction="row"
-                justify="flex-start"
-                alignItems="flex-start" spacing={45} item xs={9} className = {classes.paper}>
+          <Grid spacing={45} item xs={9} className = {classes.paper}>
            
                 <Switch>
                     <Route exact path="/home">
