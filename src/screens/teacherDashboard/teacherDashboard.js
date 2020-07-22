@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {Button, Avatar, CssBaseline, AppBar} from '@material-ui/core';
-import {useHistory, Switch, Route, useRouteMatch} from 'react-router-dom';
+import { Button, Avatar, CssBaseline, AppBar } from '@material-ui/core';
+import { useHistory, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CreateAssessment from '../createAssessments/createAssessment';
 import Students from '../students/students';
 import ViewAssessments from '../viewAssessments/viewAssessments';
@@ -41,215 +41,215 @@ import { mainListItems, secondaryListItems } from '../dashboard/listItems';
 const drawerWidth = 265;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexgrow: 1
-    },
-    avatar:{
-        alignSelf : 'center',
-        margin:"10px"
-    },
+  root: {
+    flexgrow: 1
+  },
+  avatar: {
+    alignSelf: 'center',
+    margin: "10px"
+  },
 
-    button:{
-        margin:"20px"
-    },
+  button: {
+    margin: "20px"
+  },
 
-   
-    toolbar: {
-      paddingRight: 24, // keep right padding when drawer closed
-    },
-    toolbarIcon: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-      padding: '0 8px',
-      ...theme.mixins.toolbar,
-    },
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-    },
-    appBarShift: {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    },
-    menuButton: {
-      marginRight: 36,
-    },
-    menuButtonHidden: {
-      display: 'none',
-    },
-    title: {
-      flexGrow: 1,
-    },
-    drawerPaper: {
-      position: 'relative',
-      whiteSpace: 'nowrap',
-      width: drawerWidth,
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      top: '4px'
-    },
-    drawerPaperClose: {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9),
-      },
-    },
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-      flexGrow: 1,
-      height: '100vh',
-      overflow: 'auto',
-    },
-    container: {
-      paddingTop: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
-    },
-    paper: {
-      padding: '10px !important',
-      display: 'flex',
-      overflow: 'auto',
-      flexDirection: 'column',
-    },
-    fixedHeight: {
-      height: 240,
-    },
-  }));
 
-export default function TeacherDashboard(){
+  toolbar: {
+    paddingRight: 24, // keep right padding when drawer closed
+  },
+  toolbarIcon: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: 'none',
+  },
+  title: {
+    flexGrow: 1,
+  },
+  drawerPaper: {
+    position: 'relative',
+    whiteSpace: 'nowrap',
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    top: '4px'
+  },
+  drawerPaperClose: {
+    overflowX: 'hidden',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    width: theme.spacing(7),
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9),
+    },
+  },
+  appBarSpacer: theme.mixins.toolbar,
+  content: {
+    flexGrow: 1,
+    height: '100vh',
+    overflow: 'auto',
+  },
+  container: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  paper: {
+    padding: '10px !important',
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
+  },
+  fixedHeight: {
+    height: 240,
+  },
+}));
 
-    const classes = useStyles();
-    const history = useHistory();
-    const {path,url} = useRouteMatch();
-    const [value,setValue] = useContext(UserDetailsContext);
-   
-    const [open, setOpen] = React.useState(true);
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+export default function TeacherDashboard() {
 
-    const onBtnClick = (action) =>{
-    
+  const classes = useStyles();
+  const history = useHistory();
+  const { path, url } = useRouteMatch();
+  const [value, setValue] = useContext(UserDetailsContext);
 
-        switch (action) {
-            case 'studentList':
-                    history.push('/home/students');
-                    break;
-                case 'createAssessment':
-                    history.push('/home/assessment');
-                    break;
-                case 'viewAssessments':
-                    history.push('/home/view');
-                    break;
-        
-            default:
-                break;
-        }
+  const [open, setOpen] = React.useState(true);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const onBtnClick = (action) => {
+
+
+    switch (action) {
+      case 'studentList':
+        history.push('/home/students');
+        break;
+      case 'createAssessment':
+        history.push('/home/assessment');
+        break;
+      case 'viewAssessments':
+        history.push('/home/view');
+        break;
+
+      default:
+        break;
     }
+  }
 
-    return (
-      <div  className={classes.root}>
-        <Grid container spacing={1}>
-          <div item xs={4}>
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <div item xs={3}>
           <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden,
-            )}
+          <AppBar
+            position="absolute"
+            className={clsx(classes.appBar, open && classes.appBarShift)}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                className={clsx(
+                  classes.menuButton,
+                  open && classes.menuButtonHidden,
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                Student Grading Dashboard
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
           >
-            Student Grading Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-      <span>
-      {open? (
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton> 
-          </div> ) : ''}
-          <Divider /> 
-        </span>
-        <List>{mainListItems({onAction:onBtnClick})}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-          </div>
-          <Grid spacing={45} item xs={9} className = {classes.paper}>
-           
-                <Switch>
-                    <Route exact path="/home">
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/students" >
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/assessment" >
-                            <CreateAssessment />
-                    </Route>
-                    <Route exact path="/home/view" >
-                            <ViewAssessments />
-                    </Route>
-                    <Route exact path="/home/viewAssessment" >
-                            <ViewAssessment />
-                    </Route>
-                    <Route exact path="/home/userAssessment">
-                            <AssessmentUserScreen />
-                    </Route>
-                    
-                </Switch>
-        
-          </Grid>
+            <span>
+              {open ? (
+                <div className={classes.toolbarIcon}>
+                  <IconButton onClick={handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>) : ''}
+              <Divider />
+            </span>
+            <List>{mainListItems({ onAction: onBtnClick })}</List>
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Drawer>
+        </div>
+        <Grid spacing={45} item xs={9} className={classes.paper}>
+
+          <Switch>
+            <Route exact path="/home">
+              <StudentsTemp />
+            </Route>
+            <Route exact path="/home/students" >
+              <StudentsTemp />
+            </Route>
+            <Route exact path="/home/assessment" >
+              <CreateAssessment />
+            </Route>
+            <Route exact path="/home/view" >
+              <ViewAssessments />
+            </Route>
+            <Route exact path="/home/viewAssessment" >
+              <ViewAssessment />
+            </Route>
+            <Route exact path="/home/userAssessment">
+              <AssessmentUserScreen />
+            </Route>
+
+          </Switch>
+
         </Grid>
-      </div>
-    );
+      </Grid>
+    </div>
+  );
 }
