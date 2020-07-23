@@ -24,7 +24,7 @@ export const mainListItems= (props) => (
       </ListItemIcon>
       <ListItemText primary="Create Assessment" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={()=>props.onAction('assessments')}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>

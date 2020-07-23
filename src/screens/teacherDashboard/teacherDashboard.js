@@ -147,7 +147,7 @@ export default function TeacherDashboard(){
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const onBtnClick = (action) =>{
-    
+
 
         switch (action) {
             case 'studentList':
@@ -159,6 +159,8 @@ export default function TeacherDashboard(){
                 case 'viewAssessments':
                     history.push('/home/view');
                     break;
+                case 'assessments':
+                    history.push('/home/userAssessment');
         
             default:
                 break;

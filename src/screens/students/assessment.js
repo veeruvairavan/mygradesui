@@ -118,6 +118,10 @@ export default function Assessment() {
 
         assessment.teacher = location.state.teacher;
         assessment.teacherId = location.state.teacherId;
+
+        assessment.extra = assessment.extra ? assessment.extra : {};
+
+        assessment.extra.originalId = location.state.id;
      
 
         // POST request using fetch with async/await

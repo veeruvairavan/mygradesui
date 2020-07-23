@@ -39,7 +39,7 @@ const Login = () => {
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [error, setError] = useState(false);
   const [userContext,setUserContext] = useContext(UserDetailsContext);
@@ -66,12 +66,12 @@ const Login = () => {
         
  
 
-    if (username.trim() && password.trim()) {
+    /*if (username.trim() && password.trim()) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
-    }
-  }, [username, password]);
+    }*/
+  }, []);
 
   const handleLogin = () => {
     debugger;
