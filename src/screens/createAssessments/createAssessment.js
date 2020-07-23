@@ -117,7 +117,7 @@ export default function CreateAssessment(){
                                     onChange={(event)=>onChangeName(event)}
                                     />
                     
-                    <Button onClick={onCreateAssessment}>Create</Button>
+                    <Button variant="contained" color="primary" onClick={onCreateAssessment}>Create</Button>
                 </span>
             )
         }else{

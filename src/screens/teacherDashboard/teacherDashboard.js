@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import {Button, Avatar, CssBaseline, AppBar} from '@material-ui/core';
-import {useHistory, Switch, Route, useRouteMatch} from 'react-router-dom';
+import { Button, Avatar, CssBaseline, AppBar } from '@material-ui/core';
+import { useHistory, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CreateAssessment from '../createAssessments/createAssessment';
 import Students from '../students/students';
 import ViewAssessments from '../viewAssessments/viewAssessments';
@@ -166,92 +166,93 @@ export default function TeacherDashboard(){
                 break;
         }
     }
+  
 
-    return (
-      <div  className={classes.root}>
-        <Grid container spacing={1}>
-          <div item xs={4}>
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <div item xs={3}>
           <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden,
-            )}
+          <AppBar
+            position="absolute"
+            className={clsx(classes.appBar, open && classes.appBarShift)}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                className={clsx(
+                  classes.menuButton,
+                  open && classes.menuButtonHidden,
+                )}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                component="h1"
+                variant="h6"
+                color="inherit"
+                noWrap
+                className={classes.title}
+              >
+                Student Grading Dashboard
+              </Typography>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            variant="permanent"
+            classes={{
+              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
           >
-            Student Grading Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-      <span>
-      {open? (
-          <div className={classes.toolbarIcon}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton> 
-          </div> ) : ''}
-          <Divider /> 
-        </span>
-        <List>{mainListItems({onAction:onBtnClick})}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-          </div>
-          <Grid spacing={45} item xs={9} className = {classes.paper}>
-           
-                <Switch>
-                    <Route exact path="/home">
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/students" >
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/assessment" >
-                            <CreateAssessment />
-                    </Route>
-                    <Route exact path="/home/view" >
-                            <ViewAssessments />
-                    </Route>
-                    <Route exact path="/home/viewAssessment" >
-                            <ViewAssessment />
-                    </Route>
-                    <Route exact path="/home/userAssessment">
-                            <AssessmentUserScreen />
-                    </Route>
-                    
-                </Switch>
-        
-          </Grid>
+            <span>
+              {open ? (
+                <div className={classes.toolbarIcon}>
+                  <IconButton onClick={handleDrawerClose}>
+                    <ChevronLeftIcon />
+                  </IconButton>
+                </div>) : ''}
+              <Divider />
+            </span>
+            <List>{mainListItems({ onAction: onBtnClick })}</List>
+            <Divider />
+            <List>{secondaryListItems}</List>
+          </Drawer>
+        </div>
+        <Grid spacing={45} item xs={9} className={classes.paper}>
+
+          <Switch>
+            <Route exact path="/home">
+              <StudentsTemp />
+            </Route>
+            <Route exact path="/home/students" >
+              <StudentsTemp />
+            </Route>
+            <Route exact path="/home/assessment" >
+              <CreateAssessment />
+            </Route>
+            <Route exact path="/home/view" >
+              <ViewAssessments />
+            </Route>
+            <Route exact path="/home/viewAssessment" >
+              <ViewAssessment />
+            </Route>
+            <Route exact path="/home/userAssessment">
+              <AssessmentUserScreen />
+            </Route>
+
+          </Switch>
+
         </Grid>
-      </div>
-    );
+      </Grid>
+    </div>
+  );
 }
