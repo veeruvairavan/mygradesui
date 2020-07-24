@@ -16,8 +16,7 @@ export default function SimpleTable(props){
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
-          backgroundColor: theme.palette.info.dark,
-          color: theme.palette.common.white,
+          fontWeight : 'bold',
           'min-width' : '150px'
         },
         body: {

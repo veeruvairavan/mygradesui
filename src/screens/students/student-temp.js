@@ -16,9 +16,17 @@ export default function StudentsTemp(){
       
         
         fetchStudents()
-            .then(setStudents);
+            .then((students)=>{sortAndOrderStudents(students)});
         
     },[]);
+
+    function sortAndOrderStudents(students){
+        students.sort((a,b) => (a.points < b.points) ? 1 : ((b.points < a.points) ? -1 : 0)); 
+
+       
+
+        setStudents(students);
+    }
 
     function setRows(){
         console.log(students);
@@ -31,8 +39,9 @@ export default function StudentsTemp(){
     const columns = ["Name",
                     "Catgeory",
                     "No. of Assessments",
-                    "Status",
-                    "Badges"];
+                    "Points",
+                    "Badges",
+                    "Rank"];
 
                     
 
@@ -40,14 +49,18 @@ export default function StudentsTemp(){
                     {key: 'name',isLengthCheck:false},
                     {key: 'category',isLengthCheck:false},
                     {key: 'assessments',isLengthCheck:true},
-                    {key: 'status',isLengthCheck:false},
-                    {key: 'badges',isLengthCheck:true}
+                    {key: 'points',isLengthCheck:false},
+                    {key: 'badges',isLengthCheck:true},
+                    {key: 'rank',isLengthCheck:false}
                  ];
 
 
 
    if(students){
-    return (<SimpleTable columns = {columns} rows= {rows} data={students}/>);
+    return (<div>
+                <h3> Leader Board</h3>
+                <SimpleTable columns = {columns} rows= {rows} data={students}/>
+            </div>);
    }else{
        return <div>Loading ...</div>
    }

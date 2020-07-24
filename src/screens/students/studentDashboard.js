@@ -103,6 +103,12 @@ export default function StudentDashboard() {
 
     const percentages = [];
     function setStudentAssessmentChartData(assessments) {
+
+        if(!assessments){
+            setChartData([{ name: "Above 80%", value: 0 }, { name: "Below 80%", value: 0 }]);
+
+            return;
+        }
         assessments.map(assessment => {
             percentages.push(assessment.result / assessment.correctAnswers.length * 100);
         });
