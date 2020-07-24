@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'flex-end',
-      padding: '0 8px',
+      padding: '0 1%',
       ...theme.mixins.toolbar,
     },
     appBar: {
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(4),
     },
     paper: {
-      padding: '10px !important',
+      padding: '1% !important',
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
@@ -137,7 +137,7 @@ export default function TeacherDashboard(){
     const {path,url} = useRouteMatch();
     const [value,setValue] = useContext(UserDetailsContext);
    
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
       setOpen(true);
     };
@@ -227,7 +227,7 @@ export default function TeacherDashboard(){
             <List>{secondaryListItems}</List>
           </Drawer>
         </div>
-        <Grid spacing={45} item xs={9} className={classes.paper}>
+        <Grid spacing={4} item sm={7} xs={9} className={classes.paper}>
 
           <Switch>
             <Route exact path="/home">

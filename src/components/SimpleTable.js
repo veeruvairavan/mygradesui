@@ -17,10 +17,11 @@ export default function SimpleTable(props){
     const StyledTableCell = withStyles((theme) => ({
         head: {
           fontWeight : 'bold',
-          'min-width' : '150px'
+          //'min-width' : '150px'
         },
         body: {
           fontSize: 14,
+          padding: '2%',
         },
     }))(TableCell);
       
@@ -31,10 +32,16 @@ export default function SimpleTable(props){
           },
         },
     }))(TableRow);
+
+    const StyledTableContainer = withStyles((theme) => ({
+        root: {
+          'overflow': 'auto',
+        },
+    }))(TableContainer);
     
 
-    return (<TableContainer>
-                <TableContainer>
+    return (<StyledTableContainer>
+                <StyledTableContainer>
                     <TableHead>
                         <StyledTableRow>
                             {columns.map((column)=> (
@@ -60,6 +67,6 @@ export default function SimpleTable(props){
                             ))
                         }
                     </TableBody>
-                </TableContainer>
-            </TableContainer>)
+                </StyledTableContainer>
+            </StyledTableContainer>)
 }
