@@ -42,7 +42,8 @@ const drawerWidth = 265;
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexgrow: 1
+      flexgrow: 1,
+      height: '90vh'
     },
     avatar:{
         alignSelf : 'center',
@@ -51,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
 
     button:{
         margin:"20px"
+    },
+
+    h90:{
+      height: '90%'
     },
 
    
@@ -124,9 +129,13 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       overflow: 'auto',
       flexDirection: 'column',
+      border: '1px solid lightgray',
+      margin : '1% 0% 0% 2%',
+      height: '100%',
+      background: '#fff'
     },
     fixedHeight: {
-      height: 240,
+      height: '100%',
     },
   }));
 
@@ -138,11 +147,14 @@ export default function TeacherDashboard(){
     const [value,setValue] = useContext(UserDetailsContext);
    
     const [open, setOpen] = React.useState(false);
+    const [size, setSize] = React.useState(11);
     const handleDrawerOpen = () => {
       setOpen(true);
+      setSize(9);
     };
     const handleDrawerClose = () => {
       setOpen(false);
+      setSize(11);
     };
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -170,8 +182,8 @@ export default function TeacherDashboard(){
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <div item xs={3}>
+      <Grid container spacing={1} className={classes.h90}>
+        <div item xs={3} >
           <CssBaseline />
           <AppBar
             position="absolute"
@@ -227,7 +239,7 @@ export default function TeacherDashboard(){
             <List>{secondaryListItems}</List>
           </Drawer>
         </div>
-        <Grid spacing={4} item sm={7} xs={9} className={classes.paper}>
+        <Grid spacing={4} item xs={size} className={classes.paper}>
 
           <Switch>
             <Route exact path="/home">

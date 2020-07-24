@@ -28,7 +28,7 @@ export default function App() {
 
   return (
     <UserDetailsContext.Provider value={[value,setValue]}>
-      <div>
+      <div class="app">
         <Header />
 
         <Router>
