@@ -10,6 +10,7 @@ import {
 import { Paper, Box } from '@material-ui/core';
 import assessment from 'material-ui/svg-icons/action/assessment';
 import Typography from 'material-ui/styles/typography';
+import Score from '../../components/Score';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +83,7 @@ export default function StudentDashboard() {
         const teachers = data.filter((user) => {
             user.assessments = user.assessments?.filter(assessment => {
                 return (userContext.prefs?.length > 0 &&
-                    userContext.prefs[0].completed.indexOf(assessment.id) == -1);
+                    userContext.prefs[0].completed?.indexOf(assessment.id) == -1);
             })
             return (user.category == 'Teacher');
         });
@@ -95,7 +96,7 @@ export default function StudentDashboard() {
         });
 
 
-
+        debugger;
         setTeachers(teachers);
         setStudent(student);
         setStudentAssessmentChartData(student[0]?.assessments);
@@ -136,9 +137,8 @@ export default function StudentDashboard() {
             <div>
                 <Paper elevation={10} className={classes.pointsWrapper}>
                 
-                <div className={classes.points}>
-                    {userContext.points+' Pts'}
-                </div>
+                
+                <Score score={userContext.points} suffix={'Pts'} />
                      
 
                   
