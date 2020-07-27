@@ -13,6 +13,7 @@ import ViewAssessment from '../assessment/viewAssessment';
 import AssessmentUserScreen from '../assessmentUser/assessmentUser';
 import AssessmentList from '../students/assessmentList';
 import { UserDetailsContext } from '../../App';
+import ReportCard from './reportCard';
 
 
 
@@ -37,6 +38,7 @@ import Chart from '../dashboard/Chart';
 import Deposits from '../dashboard/Deposits';
 import Orders from '../dashboard/Orders';
 import { mainListItems, secondaryListItems } from '../dashboard/listItems';
+import ReportCardWrapper from './reportCardWrapper';
 
 const drawerWidth = 265;
 
@@ -173,6 +175,11 @@ export default function TeacherDashboard(){
                     break;
                 case 'assessments':
                     history.push('/home/userAssessment');
+                    break;
+                case 'reportCard' :
+                    history.push('/home/reportCard');
+                    break
+
         
             default:
                 break;
@@ -259,6 +266,9 @@ export default function TeacherDashboard(){
             </Route>
             <Route exact path="/home/userAssessment">
               <AssessmentUserScreen />
+            </Route>
+            <Route exact path='/home/reportCard'>
+              <ReportCardWrapper />
             </Route>
 
           </Switch>

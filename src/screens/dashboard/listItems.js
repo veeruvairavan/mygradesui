@@ -30,7 +30,7 @@ export const mainListItems= (props) => (
       </ListItemIcon>
       <ListItemText primary="View Assessment" />
     </ListItem>
-    <ListItem button>
+    <ListItem button onClick={()=>props.onAction('reportCard')}>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>

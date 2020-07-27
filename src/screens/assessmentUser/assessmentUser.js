@@ -34,6 +34,11 @@ const useStyles = makeStyles(theme=>({
             minHeight : '50px',
             marginBottom : "2px",
             padding:'10px'
+          },
+          grid : {
+              height: '100vh',
+              paddingRight : '10px'
+
           }
 }));
 
@@ -122,7 +127,7 @@ export default function AssessmentUserScreen(){
         <div> <h3> View All your Assessments</h3>
 
         <Grid container  spacing={2} className = {classes.root}>
-            <Grid xs={6} >
+            <Grid className={classes.grid}>
                 {
                      assessments.map(assessment=>{
                         return(
@@ -134,18 +139,18 @@ export default function AssessmentUserScreen(){
                    
                 }
             </Grid>
-            <Grid xs={6} >
-                <Paper>
+            <Grid xs={6} className={classes.grid}>
+                <Paper className={classes.root}>
                     <div>
-                        <label>Number of Students Completed this Assessment</label>
-                        <label>{filterdAssessments.length}</label>
-                        <PieChart width={350} height={300} >
+                        <label style={{padding:'10px'}}>{filterdAssessments.length} have completed this Assessment so far.</label>
+                        
+                        <PieChart width={400} height={350} >
                         <Pie
                             data={chartData}
                             cx={175}
                             cy={140}
                             innerRadius={60}
-                            outerRadius={80}
+                            outerRadius={90}
                             fill="#8884d8"
                             paddingAngle={5}
                             dataKey="value"
@@ -194,7 +199,7 @@ export default function AssessmentUserScreen(){
         ];
 
         chartsData[0].value = filterdAssessmentsTemp.length;
-        chartsData[1].value =  students.length;
+        chartsData[1].value =  students.length - filterdAssessmentsTemp.length;
 
         setChartData(chartsData);
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import {useLocation} from 'react-router-dom';
-import { makeStyles, Paper } from '@material-ui/core';
+import { makeStyles, Paper, Tooltip } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import CircularProgressWithLabel from '../../components/CircularProgressWithLabel';
 import GoodJob from '../../assets/gifs/goodjob.gif';
+
+import BackButton from '../../components/BackButton';
 
 
 const useStyles = makeStyles((theme)=>({
@@ -77,8 +79,12 @@ export default function AssessmentResult(props){
     debugger;
     return (
         <div className={classes.root}>
+          
             <div className = {classes.resultBox}>
+               <BackButton to="/student" />
+               
                 <span className = {classes.holder}>
+                
                 <CircularProgressWithLabel txt = {assessment.result+'/'+assessment.correctAnswers.length}
                  value = {100}
                  custom={true} size="8rem"/>
@@ -110,6 +116,7 @@ export default function AssessmentResult(props){
 
                 })
             }
+           
         </div>
     )
 }
