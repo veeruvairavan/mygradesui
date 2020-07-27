@@ -5,7 +5,7 @@ import TitlebarGridList from '../../components/TitleBarGridList';
 import AssessmentList from './assessmentList';
 import { UserDetailsContext } from '../../App';
 import {
-    PieChart, Pie, Sector, Cell,
+    PieChart, Pie, Sector, Cell,ResponsiveContainer ,
 } from 'recharts';
 import { Paper, Box } from '@material-ui/core';
 import assessment from 'material-ui/svg-icons/action/assessment';
@@ -16,7 +16,8 @@ import Score from '../../components/Score';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
-        direction: "column"
+        direction: "column",
+        height: "81%"
     },
     paper: {
         padding: theme.spacing(2),
@@ -24,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
         display: 'flex',
         flexDirection: 'column',
-        height: '50%',
-        margin: '10px'
+        height: '44%',
+        margin: '3%'
 
     },
     pointsWrapper: {
@@ -34,12 +35,17 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
         display: 'flex',
         flexDirection: 'column',
-        height: '30%',
-        margin: '10px'
+        height: '44%',
+        margin: '3%'
     },
     points : {
         fontSize : '34px',
         color:'red'
+    },
+    width33 : {
+        width: '33.3%',
+        'margin-top': '2%',
+        height : '96%'
     }
 
 }));
@@ -85,14 +91,14 @@ export default function StudentDashboard() {
                 return (userContext.prefs?.length > 0 &&
                     userContext.prefs[0].completed?.indexOf(assessment.id) == -1);
             })
-            return (user.category == 'Teacher');
+            return (user.category === 'Teacher');
         });
 
 
 
 
         const student = data.filter((user) => {
-            return (user.id == userContext.id);
+            return (user.id === userContext.id);
         });
 
 
@@ -134,37 +140,36 @@ export default function StudentDashboard() {
 
     return (
         <div className={classes.root}>
-            <div>
+            <div className={classes.width33}>
                 <Paper elevation={10} className={classes.pointsWrapper}>
                 
-                
-                <Score score={userContext.points} suffix={'Pts'} />
-                     
-
-                  
+                    <Score score={userContext.points} suffix={'Pts'} />
+                    
                 </Paper>
                 <Paper elevation={10} className={classes.paper}>
                     <div> Your score Range </div>
-                    <PieChart width={350} height={300} >
-                        <Pie
-                            data={chartData}
-                            cx={175}
-                            cy={140}
-                            innerRadius={60}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            paddingAngle={5}
-                            dataKey="value"
-                            isAnimationActive={false}
-                            label={(value) => { return value.name }}
-                            position="insideStart"
-                        >
-                            {
-                                chartData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                            }
+                    <ResponsiveContainer width="95%" height="100%">
+                        <PieChart >
+                            <Pie
+                                data={chartData}
+                                cx="50%"
+                                cy="50%"
+                                innerRadius={60}
+                                outerRadius={80}
+                                fill="#8884d8"
+                                paddingAngle={5}
+                                dataKey="value"
+                                isAnimationActive={false}
+                                label={(value) => { return value.name }}
+                                position="insideStart"
+                            >
+                                {
+                                    chartData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                                }
 
-                        </Pie>
-                    </PieChart>
+                            </Pie>
+                        </PieChart>
+                    </ResponsiveContainer>
                 </Paper>
             </div>
 

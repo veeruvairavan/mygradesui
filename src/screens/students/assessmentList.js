@@ -24,12 +24,12 @@ const useStyles = makeStyles(theme=>({
       display: 'flex',
       flexDirection: 'column',
      
-      minHeight : '80vh',
-      maxHeight : '475px',
+      /* minHeight : '80vh',
+      maxHeight : '475px', */
       height : '90%',
-      margin:'10px',
+      margin:'3% 1%',
       width:'33.3%',
-      overflow:"scroll"
+      overflow:"auto"
 
     },
    
@@ -48,9 +48,9 @@ const useStyles = makeStyles(theme=>({
         },
 
         card :{
-          height:'100%',
+          //height:'100%',
           width:'100%',
-          minHeight : '80px',
+          // minHeight : '80px',
           marginBottom : "2px"
         }
   }));
