@@ -18,13 +18,13 @@ export default function ReportCardWrapper(){
 
         const d = await st.json();
 
-        return d;
+        setStudents(d);
     }
 
     useEffect(()=>{
 
-        fetchAllUserAssessments().then(setStudents);
-    });
+        fetchAllUserAssessments();
+    },[student]);
 
     return (
         <div>

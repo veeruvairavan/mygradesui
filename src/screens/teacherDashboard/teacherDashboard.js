@@ -246,7 +246,7 @@ export default function TeacherDashboard(){
             <List>{secondaryListItems}</List>
           </Drawer>
         </div>
-        <Grid spacing={4} item xs={size} className={classes.paper}>
+        <Grid spacing={4} item xl={size + 2} lg={size} md={size-1} xs={size - 2} sm={size -3} className={classes.paper}>
 
           <Switch>
             <Route exact path="/home">
