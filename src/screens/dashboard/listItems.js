@@ -9,7 +9,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import CreateIcon from '@material-ui/icons/Create';
+
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import ViewListIcon from '@material-ui/icons/ViewList';
+
 
 export const mainListItems= (props) => (
   <div>
@@ -21,13 +24,15 @@ export const mainListItems= (props) => (
     </ListItem>
     <ListItem button onClick={()=>props.onAction('createAssessment')}>
       <ListItemIcon >
-        <CreateIcon />
+
+        <NoteAddIcon />
+
       </ListItemIcon>
       <ListItemText primary="Create Assessment" />
     </ListItem>
     <ListItem button onClick={()=>props.onAction('assessments')}>
       <ListItemIcon>
-        <PeopleIcon />
+        <ViewListIcon />
       </ListItemIcon>
       <ListItemText primary="View Assessment" />
     </ListItem>
@@ -37,7 +42,7 @@ export const mainListItems= (props) => (
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItem>
-    <ListItem button>
+    <ListItem button disabled="true">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
@@ -48,20 +53,20 @@ export const mainListItems= (props) => (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    <ListSubheader inset>Others</ListSubheader>
+    <ListItem button disabled="true">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Current month Reports" />
     </ListItem>
-    <ListItem button>
+    <ListItem button disabled="true">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Last quarter Reports" />
     </ListItem>
-    <ListItem button>
+    <ListItem button disabled="true">
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
