@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { Paper, makeStyles, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import CircularProgressWithLabel from '../../components/CircularProgressWithLabel';
+import { useHistory } from "react-router-dom";
+import { UserDetailsContext } from '../../App';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         textAlign: 'center'
       }
-}))
+}));
 
 export default function ReportCard(props) {
 
@@ -28,70 +30,85 @@ export default function ReportCard(props) {
 
     const student = props.student;
 
-    if (student && student.assessments && student.assessments.length > 0) {
-        return (
-            <Paper elevation={5} className={classes.paper}>
-                <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="body1" component='body1'>
-                        <b>First Name</b> {student.firstname}
-                    </Typography>
-                </div>
-                <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="body1" component='body1'>
-                        <b>Last Name</b> {student.lastname}
-                    </Typography>
-                </div>
-                <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="body1" component='body1'>
-                        <b>Grade</b> {student.grade}
-                    </Typography>
-                </div>
-                <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="body1" component='body1'>
-                        <b>Assessments</b>
-                    </Typography>
-                </div>
-                <div>
-                    {
+    const history = useHistory();
 
-                        student.assessments.map(assessment => {
-                            return (
-                                <Paper style={{ margin: '5px', padding: '10px' }} elevation={3}>
-                                    <span style={{display:'flex',alignItems:'center'}} >
-                                        <CircularProgressWithLabel
-                                            txt={assessment.result + '/' + assessment.correctAnswers.length}
-                                            value={100}
-                                            custom={true} size="3rem"
-                                            variant="body2" />
-                                       
+    const [userContext,setUserContext] = useContext(UserDetailsContext);
 
-                                            <div style={{paddingRight:'10px'}}>
-                                                <b>Assessment</b> : {assessment.name}
-                                             </div>
+    function redirectToLogin(){
+        if(!userContext.username){
+            history.push('/login');
+            return;
+        }
+        return true;
+    }
 
-                                            <div>
-                                                <b>Percentage</b> : {Math.round((assessment.result / assessment.correctAnswers.length) * 100)}%
-                                            </div>
-                                                
-                                         
-                                         
-                                   
-                                    </span>
+    if(redirectToLogin()){
+        if (student && student.assessments && student.assessments.length > 0) {
+            return (
+                <Paper elevation={5} className={classes.paper}>
+                    <div style={{ margin: '5px', padding: '10px' }}>
+                        <Typography variant="body1" component='body1'>
+                            <b>First Name</b> {student.firstname}
+                        </Typography>
+                    </div>
+                    <div style={{ margin: '5px', padding: '10px' }}>
+                        <Typography variant="body1" component='body1'>
+                            <b>Last Name</b> {student.lastname}
+                        </Typography>
+                    </div>
+                    <div style={{ margin: '5px', padding: '10px' }}>
+                        <Typography variant="body1" component='body1'>
+                            <b>Grade</b> {student.grade}
+                        </Typography>
+                    </div>
+                    <div style={{ margin: '5px', padding: '10px' }}>
+                        <Typography variant="body1" component='body1'>
+                            <b>Assessments</b>
+                        </Typography>
+                    </div>
+                    <div>
+                        {
+
+                            student.assessments.map(assessment => {
+                                return (
+                                    <Paper style={{ margin: '5px', padding: '10px' }} elevation={3}>
+                                        <span style={{display:'flex',alignItems:'center'}} >
+                                            <CircularProgressWithLabel
+                                                txt={assessment.result + '/' + assessment.correctAnswers.length}
+                                                value={100}
+                                                custom={true} size="3rem"
+                                                variant="body2" />
+                                        
+
+                                                <div style={{paddingRight:'10px'}}>
+                                                    <b>Assessment</b> : {assessment.name}
+                                                </div>
+
+                                                <div>
+                                                    <b>Percentage</b> : {Math.round((assessment.result / assessment.correctAnswers.length) * 100)}%
+                                                </div>
+                                                    
+                                            
+                                            
+                                    
+                                        </span>
 
 
-                                </Paper>
-                            )
-                        })
+                                    </Paper>
+                                )
+                            })
 
-                    }
+                        }
 
-                </div>
-            </Paper>
-        )
-    } else {
-        return (
-            <div style={{ margin: '5px', padding: '10px' }}>Load your Report Card</div>
-        )
+                    </div>
+                </Paper>
+            )
+        } else {
+            return (
+                <div style={{ margin: '5px', padding: '10px' }}>Load your Report Card</div>
+            )
+        }
+
     }
 
 

@@ -3,6 +3,7 @@ import { Grid, makeStyles, Card, CardContent, Paper } from '@material-ui/core';
 import { UserDetailsContext } from '../../App';
 import Typography from 'material-ui/styles/typography';
 import { PieChart, Pie, Cell } from 'recharts';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme=>({
 
@@ -56,6 +57,8 @@ export default function AssessmentUserScreen(){
 
     const [filterdAssessments,setFilteredAssessments] = useState([]);
 
+    const history = useHistory();
+
     const [chartData, setChartData] = useState([
 
         { name: "Completed", value: 0 },
@@ -96,7 +99,7 @@ export default function AssessmentUserScreen(){
     }
 
     useEffect(()=>{
-       
+        redirectToLogin();
         fetchStudents().then((users)=>{
 
             setStudents(users);
@@ -122,6 +125,13 @@ export default function AssessmentUserScreen(){
         onClick(assessments[0]);
 
     },[assessments]);
+
+    function redirectToLogin(){
+        if(!value.username){
+            history.push('/login');
+            return;
+        }
+    }
 
     return (
         <div> <h3> All your Assessments</h3>

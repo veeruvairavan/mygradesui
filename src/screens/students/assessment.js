@@ -165,11 +165,21 @@ export default function Assessment() {
 
     }
 
-    return (
-        <div>
-            {render()}
-        </div>
-    )
+    function redirectToLogin(){
+        if(!userContext.username){
+            history.push('/login');
+            return;
+        }
+        return true;
+    }
+    
+    if(redirectToLogin()){
+        return (
+            <div>
+                {render()}
+            </div>
+        )
+    }
 
     function render(){
         

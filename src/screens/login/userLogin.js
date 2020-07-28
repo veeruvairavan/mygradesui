@@ -57,15 +57,9 @@ const Login = () => {
 
   useEffect(() => {
 
-  
-   
-      
-        
         fetchStudents()
             .then(setUsers);
-        
- 
-
+      
     /*if (username.trim() && password.trim()) {
       setIsButtonDisabled(false);
     } else {
@@ -77,14 +71,14 @@ const Login = () => {
     debugger;
     const userIndex = users.map((x,index)=>{return x.name.toLowerCase()}).indexOf(username.toLowerCase());
     if (userIndex != -1 
-        && password === 'password') {
+        && password === users[userIndex].password) {
  
       console.log('Jus log');
       setUserContext(users[userIndex]);
           
-      if(users[userIndex].category == "Teacher"){
+      if(users[userIndex].category === "Teacher"){
         history.push("/home");
-      }else if(users[userIndex].category == "Student"){
+      }else if(users[userIndex].category === "Student"){
         history.push("/student");
       }
 

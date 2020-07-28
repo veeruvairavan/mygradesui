@@ -137,7 +137,7 @@ export default function StudentDashboard() {
     }
 
     useEffect(() => {
-
+        redirectToLogin();
 
         fetchUsers()
             .then(isolateTeachers);
@@ -146,7 +146,7 @@ export default function StudentDashboard() {
 
     function redirectToLogin(){
         if(!userContext.username){
-            history.push('/home');
+            history.push('/login');
             return;
         }
     }

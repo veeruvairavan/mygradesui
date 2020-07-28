@@ -177,88 +177,98 @@ export default function TeacherDashboard(){
         }
     }
 
-    return (
-      <div  className={classes.root}>
-        <Grid container spacing={3}>
-          <div item xs={4}>
-          <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden,
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems({onAction:onBtnClick})}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
+    function redirectToLogin(){
+      if(!value.username){
+          history.push('/login');
+          return;
+      }
+      return true;
+    }
+
+    if(redirectToLogin()){
+      return (
+        <div  className={classes.root}>
+          <Grid container spacing={3}>
+            <div item xs={4}>
+            <CssBaseline />
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden,
+              )}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.title}
+            >
+              Dashboard
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
           </div>
-          <Grid item xs={8} >
-           
-                <Switch>
-                    <Route exact path="/home">
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/students" >
-                        <StudentsTemp />
-                    </Route>
-                    <Route exact path="/home/assessment" >
-                            <CreateAssessment />
-                    </Route>
-                    <Route exact path="/home/view" >
-                            <ViewAssessments />
-                    </Route>
-                    <Route exact path="/home/viewAssessment" >
-                            <ViewAssessment />
-                    </Route>
-                    <Route exact path="/home/userAssessment">
-                            <AssessmentUserScreen />
-                    </Route>
-                    
-                </Switch>
-        
+          <Divider />
+          <List>{mainListItems({onAction:onBtnClick})}</List>
+          <Divider />
+          <List>{secondaryListItems}</List>
+        </Drawer>
+            </div>
+            <Grid item xs={8} >
+            
+                  <Switch>
+                      <Route exact path="/home">
+                          <StudentsTemp />
+                      </Route>
+                      <Route exact path="/home/students" >
+                          <StudentsTemp />
+                      </Route>
+                      <Route exact path="/home/assessment" >
+                              <CreateAssessment />
+                      </Route>
+                      <Route exact path="/home/view" >
+                              <ViewAssessments />
+                      </Route>
+                      <Route exact path="/home/viewAssessment" >
+                              <ViewAssessment />
+                      </Route>
+                      <Route exact path="/home/userAssessment">
+                              <AssessmentUserScreen />
+                      </Route>
+                      
+                  </Switch>
+          
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
-    );
+        </div>
+      );
+    }
 }
