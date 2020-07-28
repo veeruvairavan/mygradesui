@@ -11,6 +11,8 @@ import { Paper, Box } from '@material-ui/core';
 import assessment from 'material-ui/svg-icons/action/assessment';
 import Typography from 'material-ui/styles/typography';
 import Score from '../../components/Score';
+import StudentReportCardWrapper from './studentReportCardWrapper';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +56,11 @@ export default function StudentDashboard() {
 
     const [student, setStudent] = useState([]);
 
+    const history = useHistory();
+
     const [userContext, setUserContext] = useContext(UserDetailsContext);
+
+    
 
     const [chartData, setChartData] = useState([
 
@@ -132,14 +138,24 @@ export default function StudentDashboard() {
 
     }, []);
 
+    function redirectToLogin(){
+        if(!userContext.username){
+            history.push('/home');
+            return;
+        }
+    }
+
+
     return (
+       
         <div className={classes.root}>
+           
             <div>
                 <Paper elevation={10} className={classes.pointsWrapper}>
                 
                 
                 <Score score={userContext.points} suffix={'Pts'} />
-                     
+                 <StudentReportCardWrapper student={student[0]}/>     
 
                   
                 </Paper>

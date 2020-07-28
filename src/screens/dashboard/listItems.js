@@ -9,6 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import CreateIcon from '@material-ui/icons/Create';
 
 export const mainListItems= (props) => (
   <div>
@@ -20,7 +21,7 @@ export const mainListItems= (props) => (
     </ListItem>
     <ListItem button onClick={()=>props.onAction('createAssessment')}>
       <ListItemIcon >
-        <ShoppingCartIcon />
+        <CreateIcon />
       </ListItemIcon>
       <ListItemText primary="Create Assessment" />
     </ListItem>

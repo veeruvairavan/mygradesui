@@ -6,13 +6,20 @@ import CircularProgressWithLabel from '../../components/CircularProgressWithLabe
 const useStyles = makeStyles((theme) => ({
     paper: {
 
-        width: '90vw',
+        width: '90%',
         margin: `${theme.spacing(0)} auto`,
-        height: '90vh',
+        height: '80vh',
         padding: '10px'
 
 
-    }
+    },
+    spanX  : { 
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'left',
+        width: '100%',
+        textAlign: 'center'
+      }
 }))
 
 export default function ReportCard(props) {
@@ -25,17 +32,22 @@ export default function ReportCard(props) {
         return (
             <Paper elevation={5} className={classes.paper}>
                 <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="h6" component='h6'>
+                    <Typography variant="body1" component='body1'>
                         <b>First Name</b> {student.firstname}
                     </Typography>
                 </div>
                 <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="h6" component='h6'>
+                    <Typography variant="body1" component='body1'>
                         <b>Last Name</b> {student.lastname}
                     </Typography>
                 </div>
                 <div style={{ margin: '5px', padding: '10px' }}>
-                    <Typography variant="h6" component='h6'>
+                    <Typography variant="body1" component='body1'>
+                        <b>Grade</b> {student.grade}
+                    </Typography>
+                </div>
+                <div style={{ margin: '5px', padding: '10px' }}>
+                    <Typography variant="body1" component='body1'>
                         <b>Assessments</b>
                     </Typography>
                 </div>
@@ -45,27 +57,26 @@ export default function ReportCard(props) {
                         student.assessments.map(assessment => {
                             return (
                                 <Paper style={{ margin: '5px', padding: '10px' }} elevation={3}>
-                                    <div>
+                                    <span style={{display:'flex',alignItems:'center'}} >
                                         <CircularProgressWithLabel
                                             txt={assessment.result + '/' + assessment.correctAnswers.length}
                                             value={100}
                                             custom={true} size="3rem"
                                             variant="body2" />
-                                        <Typography variant="h6" component='h6'>
+                                       
 
-                                            <Grid xs={6}>
+                                            <div style={{paddingRight:'10px'}}>
                                                 <b>Assessment</b> : {assessment.name}
-                                            </Grid>
-                                            <Grid xs={6}>
+                                             </div>
+
+                                            <div>
                                                 <b>Percentage</b> : {Math.round((assessment.result / assessment.correctAnswers.length) * 100)}%
-
-                       </Grid>
-
-
-
-
-                                        </Typography>
-                                    </div>
+                                            </div>
+                                                
+                                         
+                                         
+                                   
+                                    </span>
 
 
                                 </Paper>

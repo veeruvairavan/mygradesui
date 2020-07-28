@@ -124,7 +124,7 @@ export default function AssessmentUserScreen(){
     },[assessments]);
 
     return (
-        <div> <h3> View All your Assessments</h3>
+        <div> <h3> All your Assessments</h3>
 
         <Grid container  spacing={2} className = {classes.root}>
             <Grid className={classes.grid}>

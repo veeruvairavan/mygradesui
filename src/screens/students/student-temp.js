@@ -1,5 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import SimpleTable from '../../components/SimpleTable';
+import ViewAssessment from '../assessment/viewAssessment';
+import AssessmentUserScreen from '../assessmentUser/assessmentUser';
 
 export default function StudentsTemp(){
 
@@ -58,8 +60,9 @@ export default function StudentsTemp(){
 
    if(students){
     return (<div>
-                <h3> Leader Board</h3>
+                <h3 style={{marginTop:'-1px'}}> Leader Board</h3>
                 <SimpleTable columns = {columns} rows= {rows} data={students}/>
+                <AssessmentUserScreen />
             </div>);
    }else{
        return <div>Loading ...</div>
