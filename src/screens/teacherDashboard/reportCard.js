@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
 
         width: '90%',
         margin: `${theme.spacing(0)} auto`,
-        height: '80vh',
+        height: '100%',
         padding: '10px'
 
 

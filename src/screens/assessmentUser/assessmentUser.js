@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { Grid, makeStyles, Card, CardContent, Paper } from '@material-ui/core';
+import { Grid, makeStyles, Card, CardContent, Paper, Backdrop, CircularProgress } from '@material-ui/core';
 import { UserDetailsContext } from '../../App';
 import Typography from 'material-ui/styles/typography';
 import { PieChart, Pie, Cell } from 'recharts';
@@ -40,7 +40,12 @@ const useStyles = makeStyles(theme=>({
               height: '100vh',
               paddingRight : '10px'
 
-          }
+          },
+          
+        backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      }
 }));
 
 export default function AssessmentUserScreen(){
@@ -69,6 +74,8 @@ export default function AssessmentUserScreen(){
     const [students,setStudents] = useState([]);
 
     const COLORS = ['#0088FE', '#FF8042', '#FFBB28', '#FF8042'];
+
+    const [open,setOpen] = useState(true);
     
     async function fetchAssessments() {
 
@@ -108,6 +115,7 @@ export default function AssessmentUserScreen(){
                 setAllUserAssessments(d);
 
                 fetchAssessments().then((data)=>{
+                    setOpen(false);
                     setAssessments(data);
                     
                 });
@@ -150,7 +158,7 @@ export default function AssessmentUserScreen(){
                 }
             </Grid>
             <Grid xs={6} className={classes.grid}>
-                <Paper className={classes.root}>
+                <Paper className={classes.root} elevation={3}>
                     <div>
                         <label style={{padding:'10px'}}>{filterdAssessments.length} have completed this Assessment so far.</label>
                         
@@ -178,6 +186,9 @@ export default function AssessmentUserScreen(){
                 </Paper>
             </Grid>
         </Grid>
+        <Backdrop className={classes.backdrop} open={open}>
+            <CircularProgress color="inherit" />
+        </Backdrop>
         </div>
     )
 

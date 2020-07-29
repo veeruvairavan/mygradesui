@@ -7,7 +7,7 @@ import { UserDetailsContext } from '../../App';
 import {
     PieChart, Pie, Sector, Cell,ResponsiveContainer ,
 } from 'recharts';
-import { Paper, Box } from '@material-ui/core';
+import { Paper, Box, Backdrop, CircularProgress } from '@material-ui/core';
 import assessment from 'material-ui/svg-icons/action/assessment';
 import Typography from 'material-ui/styles/typography';
 import Score from '../../components/Score';
@@ -48,7 +48,11 @@ const useStyles = makeStyles((theme) => ({
         width: '33.3%',
         'margin-top': '2%',
         height : '96%'
-    }
+    },
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      }
 
 }));
 
@@ -65,6 +69,8 @@ export default function StudentDashboard() {
     const history = useHistory();
 
     const [userContext, setUserContext] = useContext(UserDetailsContext);
+
+    const [open,setOpen] = useState(true);
 
     
 
@@ -91,6 +97,8 @@ export default function StudentDashboard() {
     const COLORS = ['#0088FE', '#FF8042', '#FFBB28', '#FF8042'];
 
     function isolateTeachers(data) {
+
+        setOpen(false);
 
         const teachers = data.filter((user) => {
             user.assessments = user.assessments?.filter(assessment => {
@@ -199,6 +207,10 @@ export default function StudentDashboard() {
             <AssessmentList teachers={teachers} />
 
             <AssessmentList student={student} />
+
+            <Backdrop className={classes.backdrop} open={open}>
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </div>
     )
 }

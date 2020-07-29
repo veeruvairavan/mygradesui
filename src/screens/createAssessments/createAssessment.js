@@ -60,11 +60,37 @@ export default function CreateAssessment(){
     let optionTxt = '';
     const [name,setName] = useState('');
     const [isAssessmentCreated,setAssessment] = useState(false);
-
+    const [createError,setCreateError] = useState(false);
+    const [createTxt,setCreateTxt] = useState('');
+    const [qError,setQError] = useState(false);
+    const [qTxt,setQTxt] = useState('');
+    const [oError,setOError] = useState(false);
+    const [optionHelperTxt,setOptionTxt] = useState('');
+    
     const onAddNewQuestion = (index)=>{
-        debugger;
-        changeSelectedQuestion(index+1);
-        addQuestion([...questions,{question:"",options:[]}]);
+       
+        if(questions[questions.length-1].question && 
+            questions[questions.length-1].options.length>1){
+            changeSelectedQuestion(index+1);
+            addQuestion([...questions,{question:"",options:[]}]);
+        }else{
+            if(!questions[questions.length-1].question){
+                setQError(true);
+                setQTxt("Need a Question to proceed")
+            }
+
+            if(!(questions[questions.length-1].options.length>1)){
+                setOError(true);
+                setOptionTxt("Need atleast two options to proceed");
+            }
+                
+
+            
+            
+        }
+        
+        
+        
     }
 
     function onChangeName(event){
@@ -74,7 +100,13 @@ export default function CreateAssessment(){
     }
 
     function onCreateAssessment(){
-        setAssessment(true);
+        if(name){
+            setAssessment(true);
+        }else{
+            setCreateError(true);
+            setCreateTxt('Need an Assessment title to proceed');
+        }
+            
     }
 
     function renderAssessmentForm(){
@@ -109,7 +141,9 @@ export default function CreateAssessment(){
             return (
                 <span>
                     <TextField className={classes.text} 
-                                    label="Assessment" 
+                                    label="Assessment Title" 
+                                    error={createError}
+                                    helperText = {createTxt}
                                     color="secondary" 
                                     value = {name}
                                     autoFocus
@@ -117,7 +151,8 @@ export default function CreateAssessment(){
                                     onChange={(event)=>onChangeName(event)}
                                     />
                     
-                    <Button variant="contained" color="primary" onClick={onCreateAssessment}>Create</Button>
+                    <Button variant="contained" color="primary" 
+                        onClick={onCreateAssessment}>Create</Button>
                 </span>
             )
         }else{
@@ -150,12 +185,14 @@ export default function CreateAssessment(){
         
         event.preventDefault();
       
+    
+        let newQuestions = [...questions];
+
+        newQuestions[prop.index].question = event.target.value;
+
+        addQuestion(newQuestions);
+       
         
-       let newQuestions = [...questions];
-
-       newQuestions[prop.index].question = event.target.value;
-
-       addQuestion(newQuestions);
 
      
     }
@@ -172,6 +209,10 @@ export default function CreateAssessment(){
        }else{
         newQuestions[prop.index].options = [];
         newQuestions[prop.index].options.push(optionTxt);
+       }
+
+       if(newQuestions[prop.index].options.length>1){
+        setOError(false);
        }
        
 
@@ -239,6 +280,8 @@ export default function CreateAssessment(){
                                     value = {prop.question.question}
                                     autoFocus
                                     key={prop.index}
+                                    error = {qError}
+                                    helperText ={qTxt}
                                     onChange={(e)=>onChangeText(e,prop)}
                                     /> 
 
@@ -269,6 +312,8 @@ export default function CreateAssessment(){
                         <TextField className={classes.option}
                         label="Type your option here"
                         key={`option ${prop.index}`}
+                        error = {oError}
+                        helperText = {optionHelperTxt}
                         onChange={(e)=>onChangeOptionTxt(e)}
                         />
                         <AddIcon color="primary" 

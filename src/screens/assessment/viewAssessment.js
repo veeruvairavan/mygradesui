@@ -38,6 +38,8 @@ export default function ViewAssessment() {
 
     const [value,setValue] = useContext(UserDetailsContext);
 
+    const [isAllChecked,setIsAllChecked] = useState(false);
+
    
     debugger;
 
@@ -81,6 +83,13 @@ export default function ViewAssessment() {
         assessment.teacher = value.gender+value.lastname;
         debugger;
 
+        if(assessment.correctAnswers.length == assessment.qa.length){
+            setIsAllChecked(false);
+        }else{
+            setIsAllChecked(true);
+            return;
+        }
+
         // POST request using fetch with async/await
         const requestOptions = {
                 method: 'POST',
@@ -106,6 +115,12 @@ export default function ViewAssessment() {
             if(!isCreated){
             return (
                 <div>
+                    <h2>Please select the correct answers for the Assessment Evaluation</h2>
+                    {
+                        !isAllChecked ? '' :
+                        <h3 style={{color:'red'}}>You have to select all the correct answers to proceed</h3>
+                    }
+                    
                     <h2>{name}</h2>
                     {
                         questions.map((question,questionIndex) => (
