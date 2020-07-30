@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme) => ({
         height: "81%"
     },
     paper: {
-        padding: theme.spacing(2),
+       
         textAlign: 'center',
         color: theme.palette.text.secondary,
         display: 'flex',
         flexDirection: 'column',
         height: '44%',
-        margin: '3%'
+        margin: '3%',
+        padding:'1px'
 
     },
     pointsWrapper: {
@@ -183,8 +184,8 @@ export default function StudentDashboard() {
                                 data={chartData}
                                 cx="50%"
                                 cy="50%"
-                                innerRadius={60}
-                                outerRadius={80}
+                                innerRadius={40}
+                                outerRadius={70}
                                 fill="#8884d8"
                                 paddingAngle={5}
                                 dataKey="value"

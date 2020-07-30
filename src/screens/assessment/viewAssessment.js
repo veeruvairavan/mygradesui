@@ -152,6 +152,7 @@ export default function ViewAssessment() {
         }else{
             return (
                 <div> 
+                    <h3> Your Assessment has been created and sent to students.</h3>
                     <img src={Done} />
                 </div>
             )

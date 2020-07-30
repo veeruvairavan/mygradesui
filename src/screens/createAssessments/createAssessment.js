@@ -66,6 +66,7 @@ export default function CreateAssessment(){
     const [qTxt,setQTxt] = useState('');
     const [oError,setOError] = useState(false);
     const [optionHelperTxt,setOptionTxt] = useState('');
+    const [reviewMsg,setReviewMsg] = useState('');
     
     const onAddNewQuestion = (index)=>{
        
@@ -128,6 +129,7 @@ export default function CreateAssessment(){
                                 onClick={onPreviewAssessment}>
                                     Review Assessment
                         </Button>  
+                        <div style={{color:'red'}}>{reviewMsg}</div>
                     </div> 
             )
         }else{
@@ -189,6 +191,11 @@ export default function CreateAssessment(){
         let newQuestions = [...questions];
 
         newQuestions[prop.index].question = event.target.value;
+
+        if(newQuestions[prop.index].question != '' ){
+            setQError(false);
+        }
+            
 
         addQuestion(newQuestions);
        
@@ -353,7 +360,12 @@ export default function CreateAssessment(){
     }
 
     function onPreviewAssessment(){
-        history.push('/home/viewAssessment',{name:name,questions:[...questions]});
+        if(questions.length > 2){
+            history.push('/home/viewAssessment',{name:name,questions:[...questions]});
+        }else{
+            setReviewMsg("You must create atleast 3 questions to proceed further.")
+        }
+            
     }
 }
 

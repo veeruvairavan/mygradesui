@@ -101,7 +101,7 @@ export default function AssessmentList(props){
                   )
               }else{
                 return(
-                  <div>No Pending Assessments for You!</div>
+                  <div></div>
                 )
               }
               
@@ -147,7 +147,9 @@ export default function AssessmentList(props){
   
     return (
         <Paper elevation = {10} className={classes.paper}>
+
             {
+              
               renderAssessment()
             }
         </Paper>

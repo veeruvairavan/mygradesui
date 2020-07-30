@@ -48,6 +48,11 @@ export default function ReportCard(props) {
                 </div>
                 <div style={{ margin: '5px', padding: '10px' }}>
                     <Typography variant="body1" component='body1'>
+                        <b>Points Scored</b> {student.points}
+                    </Typography>
+                </div>
+                <div style={{ margin: '5px', padding: '10px' }}>
+                    <Typography variant="body1" component='body1'>
                         <b>Assessments</b>
                     </Typography>
                 </div>
