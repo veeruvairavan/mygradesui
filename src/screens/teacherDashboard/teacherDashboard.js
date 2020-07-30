@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Button, Avatar, CssBaseline, AppBar } from '@material-ui/core';
 import { useHistory, Switch, Route, useRouteMatch } from 'react-router-dom';
 import CreateAssessment from '../createAssessments/createAssessment';
@@ -14,8 +15,8 @@ import AssessmentUserScreen from '../assessmentUser/assessmentUser';
 import AssessmentList from '../students/assessmentList';
 import { UserDetailsContext } from '../../App';
 import ReportCard from './reportCard';
-
-
+import { green } from '@material-ui/core/colors';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -158,6 +159,10 @@ export default function TeacherDashboard(){
       setOpen(false);
       setSize(11);
     };
+    const handleLogout = () => {
+      //setValue(value.name);
+      history.push('/login');
+    }
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     const onBtnClick = (action) =>{
@@ -218,11 +223,14 @@ export default function TeacherDashboard(){
               >
                 Student Grading Dashboard
               </Typography>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              <Tooltip title="Logout">
+                <IconButton onClick={handleLogout} aria-label="Logout">
+                  {/* <Badge badgeContent={4} color="secondary">
+                    <NotificationsIcon />
+                  </Badge> */}
+                  <ExitToAppIcon style={{ color: green[50] }} />
+                </IconButton>
+              </Tooltip>
             </Toolbar>
           </AppBar>
           <Drawer

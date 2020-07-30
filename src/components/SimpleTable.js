@@ -21,8 +21,11 @@ export default function SimpleTable(props){
         },
         body: {
           fontSize: 14,
-          padding: '2%',
+          //padding: '2%',
         },
+        root: {
+            //padding: '5%'
+        }
     }))(TableCell);
       
     const StyledTableRow = withStyles((theme) => ({
@@ -38,10 +41,17 @@ export default function SimpleTable(props){
           'overflow': 'auto',
         },
     }))(TableContainer);
+
+    const StyledInnerTableContainer = withStyles((theme) => ({
+        root: {
+          'overflow': 'auto',
+          display : 'table'
+        },
+    }))(TableContainer);
     
 
     return (<StyledTableContainer>
-                <StyledTableContainer>
+                <StyledInnerTableContainer>
                     <TableHead>
                         <StyledTableRow>
                             {columns.map((column)=> (
@@ -67,6 +77,6 @@ export default function SimpleTable(props){
                             ))
                         }
                     </TableBody>
-                </StyledTableContainer>
+                </StyledInnerTableContainer>
             </StyledTableContainer>)
 }
