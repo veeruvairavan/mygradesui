@@ -100,7 +100,7 @@ const Login = () => {
     <React.Fragment>
       <form className={classes.container} noValidate autoComplete="off">
         <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Happy Learning" />
+          <CardHeader className={classes.header} title="Learn with Fun" />
           <CardContent>
             <div>
               <TextField
@@ -131,7 +131,7 @@ const Login = () => {
             <Button
               variant="contained"
               size="large"
-              color="secondary"
+              color="primary"
               className={classes.loginBtn}
               onClick={()=>handleLogin()}
               disabled={isButtonDisabled}>

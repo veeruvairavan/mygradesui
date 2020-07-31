@@ -58,10 +58,10 @@ export default function header() {
             </IconButton>
             <div>
               <Typography variant="h6" className={classes.title}>
-                Student Grading Dashboard
+                 Grader
               </Typography>
               <Typography variant="h7" className={classes.title}>
-                Welcome {userContext.name}
+                Welcome {userContext.firstname}  {userContext.lastname}
               </Typography>
             </div>
           </span>

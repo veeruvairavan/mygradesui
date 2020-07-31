@@ -221,7 +221,7 @@ export default function TeacherDashboard(){
                 noWrap
                 className={classes.title}
               >
-                Student Grading Dashboard
+                Dashboard
               </Typography>
               <Tooltip title="Logout">
                 <IconButton onClick={handleLogout} aria-label="Logout">
