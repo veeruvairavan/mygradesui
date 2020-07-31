@@ -155,7 +155,7 @@ You can find a running system to test at [studentgraderui.eu-gb.mybluemix.net/lo
 
 * [LoopBack 4](https://loopback.io/doc/en/lb4/) - Server
 * [React js](https://reactjs.org/) - UI
-* [IBM Cloud Foundry]://www.ibm.com/in-en/cloud/cloud-foundry) - Deployment
+* [IBM Cloud Foundry]:(https://www.ibm.com/in-en/cloud/cloud-foundry) - Deployment
 
 ## Authors
 
