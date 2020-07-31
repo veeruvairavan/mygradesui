@@ -43,17 +43,18 @@ Developed a highly reusable components in the interest of the Project expansion.
 
 ## Long description
 
-Problem:
+### Problem:
 During this pandemic schools across the globe have been shut down for good and kids are taking it all online especially the Video classes as they try to learn via Video Conferencing using software’s like Xoom, Google Meet and other Video Conferencing solutions. In developing nations as well people use Xoom, google meet, WhatsApp Video call, Face time app to conduct online classes because all these are available for free to the end users but not all platforms provides a way to assess the students by giving some assessments on a daily basis or a weekly basis and see their progress. This problem is very prone especially for the private tutors and folks who are conducting free online classes for a group of students. I started noticing this problem when my Mom who was a High school retired Physics teacher trying to take some online classes for my 7 year old and her friends during this pandemic as both were in different parts of the world, she takes classes via FaceTime and WhatsApp up to a group of 4 students but when it comes to assessments and every day assignments she has to use a paper and pen and capture it as a photo and send it to the WhatsApp group where students pick it up with the help of parents and they complete the same in paper and pen and send it back as an image. This process is taking a toll on both Tutors and student’s time as this will be happening mostly for private tutoring lessons and charity sessions.
 
-Solution:
+### Solution:
 We came up with a solution to mitigate this problem by developing an Assessment tool where the assessor or the teacher can simply create any kind of Assessment and broadcast it to his/her students and students can attempt that Assessment.  The Assessor can also mark the correct answers or choices when he creates the assessment so that the students can see their results right after completing the assessment. Students will also have an option to review their answers and learn from their mistakes. We have also tried to gamify the platform so that students can earn points and badges as they progress.  Right now we have deployed the app in the IBM cloud and provided the details to login as a user and as a student and we have plans to expand its road in future. 
 
-Our Vision:
+### Vision:
 Our vision is to make this application easily pluggable with any Video Conferencing application or basically any eLearning application. So definitely plug ability is a feature among others like User Registration, Group Set up, Different Question and Answer types which includes Objective and Subjective patterns, more gamified approach like fastest finger will earn a badge etc. Mobile responsiveness as we purposefully left that because we want both Assessors and Students to use Desktops and Laptops to learn rather using a handheld device. Of course we have plans to roll this out to bigger institutions and schools in a long run but for now we are giving away this for economically backwards schools, charity sessions, private tutors who conducts charity sessions or with lowered fee. 
 
-Publically hosted URL:
+### Publically hosted URL:
 https://studentgraderui.eu-gb.mybluemix.net/login
+
 Assessor Login: william/password123
 Student Login: arya/password123
 
@@ -145,11 +146,6 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/ad
 This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
 ### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-=======
-# mygradesui
-UI React App
 
 ## Live demo
 
