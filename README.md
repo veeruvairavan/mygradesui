@@ -149,8 +149,8 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 You can find a running system to test at [studentgraderui.eu-gb.mybluemix.net/login](https://studentgraderui.eu-gb.mybluemix.net/login)
 
-### Assessor Login: william/password123
-### Student Login: arya/password123
+* Assessor Login: william/password123
+* Student Login: arya/password123
 
 ## Built with
 
