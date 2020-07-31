@@ -34,12 +34,12 @@ Developed a highly reusable components in the interest of the Project expansion.
 
 ## Demo video
 
-[![Watch the video](https://github.com/Code-and-Response/Liquid-Prep/blob/master/images/IBM-interview-video-image.png)](https://www.youtube.com/watch?v=oWJGJ94SD8U
+[![Watch the video](https://github.com/veeruvairavan/mygrades/blob/master/youTube.png)](https://www.youtube.com/watch?v=oWJGJ94SD8U
 )
 
 ## The architecture
 
-![Video transcription/translation app](https://developer.ibm.com/developer/tutorials/cfc-starter-kit-speech-to-text-app-example/images/cfc-covid19-remote-education-diagram-2.png)
+![Video transcription/translation app](https://github.com/veeruvairavan/mygrades/blob/master/Architecture.png)
 
 1. The user navigates to the site and uploads a video file.
 2. Watson Speech to Text processes the audio and extracts the text.
@@ -52,7 +52,7 @@ Developed a highly reusable components in the interest of the Project expansion.
 
 ## Project roadmap
 
-![Roadmap](roadmap.jpg)
+![https://github.com/veeruvairavan/mygrades/blob/master/RoadMap.png](RoadMap.png)
 
 ## Getting started
 
